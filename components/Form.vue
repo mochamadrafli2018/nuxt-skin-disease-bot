@@ -271,7 +271,7 @@
       value="gejala54"
     > Seperti ada benda asing di mata</label>
 
-    <button class='bg-green-500 hover:bg-green-600 text-white hover:text-white mx-auto my-3 px-3 py-2 rounded-full shadow'
+    <button class='bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-200 text-white hover:text-white mx-auto my-3 px-3 py-2 rounded-full shadow'
       @click='send()'
     >
       Submit

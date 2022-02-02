@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-slate-300 quicksand">
+  <div class="bg-slate-400 quicksand">
     <div class='bg-slate-900 text-center text-white w-full'>Eye-Screening Form</div>
 
     <Navbar/>
@@ -12,7 +12,7 @@
         Web App Skrining Penyakit Mata berbasis Form
       </h2>
       <!-- Form -->
-      <div class="bg-slate-900 bg-white mt-5 px-6 overflow-hidden rounded-lg shadow">
+      <div class="bg-slate-900 mt-5 px-6 overflow-hidden rounded-lg">
         <p class="my-2 text-xl text-center text-white">
           Pilih Beberapa Gejala Penyakit Mata di Bawah ini
         </p>
@@ -35,9 +35,9 @@
       <div class="flex flex-row justify-center my-2 space-x-5">
         <a
           v-for="(icon,index) in icons" :key="index" :href= "icon.link" target="_blank"
-          class="bg-green-500 hover:bg-green-600 p-1 rounded-lg"
+          class="bg-gray-200 hover:bg-white text-white p-1 rounded-lg"
         >
-          <v-icon class='icon text-black' size="24px">
+          <v-icon class='icon text-white' size="24px">
             {{ icon.logo }}
           </v-icon>
         </a>
