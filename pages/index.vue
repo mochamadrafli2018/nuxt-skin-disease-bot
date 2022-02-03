@@ -1,6 +1,8 @@
 <template>
-  <div class="bg-slate-400 quicksand">
-    <div class='bg-slate-900 text-center text-white w-full'>Eye-Screening Form</div>
+  <div class="bg-gradient-to-b from-slate-400 to-slate-500 quicksand">
+    <div class='bg-slate-900 text-center text-white w-full'>
+      Eye-Screening Form
+    </div>
 
     <Navbar/>
 
@@ -12,7 +14,7 @@
         Web App Skrining Penyakit Mata berbasis Form
       </h2>
       <!-- Form -->
-      <div class="bg-slate-900 mt-5 px-6 overflow-hidden rounded-lg">
+      <div class="bg-slate-900 mt-5 px-6 pb-3 overflow-hidden rounded-lg">
         <p class="my-2 text-xl text-center text-white">
           Pilih Beberapa Gejala Penyakit Mata di Bawah ini
         </p>
@@ -79,10 +81,6 @@ footer{
 }
 main{
   padding-top:60px;
-}
-Navbar{
-  position: -webkit-sticky;
-  position: sticky;
 }
 .quicksand {
   font-family: Quicksand, Arial, sans-serif;

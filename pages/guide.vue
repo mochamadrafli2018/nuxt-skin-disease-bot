@@ -1,5 +1,9 @@
 <template>
-  <div class="bg-slate-400 pb-5 quicksand">
+  <div class="h-screen bg-gradient-to-b from-slate-400 to-slate-500 pb-5 quicksand">
+    <div class='bg-slate-900 text-center text-white w-full'>
+      Panduan Melakukan Skrining
+    </div>
+
     <Navbar class='z-20'/>
     
     <main class='max-w-4xl mx-auto sm:px-6 lg:px-8'>
@@ -18,7 +22,7 @@
       </v-expansion-panels>
     </main>
     
-    <footer class="bg-slate-700 text-center text-gray-200 z-20">
+    <footer class="bg-slate-900 text-center text-gray-200 z-20">
       <p>&copy; {{ new Date().getFullYear() }} — Mochamad Rafli Ramadhan</p>
     </footer>
   </div>
@@ -38,7 +42,7 @@ export default {
         text:`
           1.) Ulkus Kornea, 
           2.) Keratokonus, 
-          3.) Kalazion, 
+          3.) Kalazion,
           4.) Blefaritis, 
           5.) Hordeolum (Stye), 
           6.) Konjungtivitis, 
@@ -62,8 +66,7 @@ export default {
           24.) Infeksi Herpes Zoster Kornea, 
           25.) Keratitis Ulserativa Perifer, 
           26.) Degenerasi Makula, 
-          27.) Skleritis.
-        `
+          27.) Skleritis.`
       },
       {
         title:'Catatan Penting',
@@ -84,7 +87,6 @@ footer{
 }
 main{
   padding-top:50px;
-  padding-bottom:120px;
 }
 .quicksand {
   font-family: Quicksand, Arial, sans-serif;

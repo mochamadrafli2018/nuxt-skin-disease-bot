@@ -19,9 +19,39 @@ $ npm run generate
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
+## Next.js (React Framework) and Nuxt.js (Vue Framework) Similarities
+
+List of similiarities function or whatever it called that sometimes make me confused.
+
+### Looping inside component (React | Vue)
+data.map((i,index) => (<some JSX>)) | v-for="(i,index) in data"
+
+### Key for index (React | Vue)
+key={} | :key=""
+
+### Link (React | Vue)
+href="" | :href=""
+
+### Validator (React | Vue)
+{condition? (<some JSX>)} | v-if="condition"
+
+### Input <input/> change handler (React | Vue)
+onChange={(e) => {setValue(e.target.value);}} | v-model="value"
+
+### State (React | Vue)
+[data, setData] = useState(""); | data(){ return { data:"", } }
+
+### Passing Data (React | Vue)
+{ data } | {{ data }}
+
 ## Reference 
 
-1.) https://developer.mozilla.org/en-US/docs/Web/CSS/position
+1.) Sticky Navbar : https://developer.mozilla.org/en-US/docs/Web/CSS/position
+2.) Set background color full screen height : https://www.geeksforgeeks.org/how-to-set-a-background-color-to-full-page-using-tailwind-css/
+3.) Using axios in Nuxt.js : https://axios.nuxtjs.org/options
+4.) Set v-model in checkbox array : https://www.nicesnippets.com/blog/vue-js-get-checked-value-of-checkbox-if-use-array-as-a-model
+5.) Using this.$router.push() in Nuxt.js : https://stackoverflow.com/questions/50375244/push-a-route-moving-from-vuejs-to-nuxtjs
+6.) Using redirect() : https://nuxtjs.org/docs/internals-glossary/context#redirect
 
 ## Error
 
@@ -32,8 +62,12 @@ Solution : https://stackoverflow.com/questions/53420082/vue-warn-avoid-using-non
 Solution : Using Class='' instead.
 3.) Problem : bg-color tailwind is not working in Nuxt.js <main> tag
 Solution : https://stackoverflow.com/questions/65812581/tailwind-custom-colors-default-not-working
-3.) Problem : Using checkbox
+4.) Problem : Using checkbox
 Solution : https://stackoverflow.com/questions/41001192/setting-a-checkbox-as-checked-with-vue-js
+5.) Problem : Created(){} in Nuxt.js error, but in Vue.js is not.
+Solution : Just delete Created(){} in export default {} inside <script></script>
+6.) Problem : Cannot read properties of undefined (reading '$axios')
+Solution : Delete $axios an replace with axios, also axios need to be imported as follow. Just add import axios from 'axios' inside <script></script>
 
 ## Special Directories
 
