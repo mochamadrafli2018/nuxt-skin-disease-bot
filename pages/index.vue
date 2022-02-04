@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gradient-to-b from-slate-400 to-slate-500 quicksand">
+  <div class="bg-gradient-to-b from-slate-300 to-slate-400 quicksand">
     <div class='bg-slate-900 text-center text-white w-full'>
       Eye-Screening Form
     </div>
@@ -80,7 +80,7 @@ footer{
   margin-top:20px;
 }
 main{
-  padding-top:60px;
+  padding-top:50px;
 }
 .quicksand {
   font-family: Quicksand, Arial, sans-serif;

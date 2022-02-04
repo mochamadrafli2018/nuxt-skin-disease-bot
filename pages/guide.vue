@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen bg-gradient-to-b from-slate-400 to-slate-500 pb-5 quicksand">
+  <div class="h-screen bg-gradient-to-b from-slate-300 to-slate-400 pb-5 quicksand">
     <div class='bg-slate-900 text-center text-white w-full'>
       Panduan Melakukan Skrining
     </div>

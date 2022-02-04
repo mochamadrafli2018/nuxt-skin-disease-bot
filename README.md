@@ -24,24 +24,27 @@ For detailed explanation on how things work, check out the [documentation](https
 List of similiarities function or whatever it called that sometimes make me confused.
 
 ### Looping inside component (React | Vue)
-data.map((i,index) => (<some JSX>)) | v-for="(i,index) in data"
+data.map((i,index) => (<some JSX>)) | <div v-for="(i,index) in data">some HTML</div>
 
 ### Key for index (React | Vue)
-key={} | :key=""
+<div key={}>some HTML</div> | <div :key="">some HTML</div>
 
-### Link (React | Vue)
-href="" | :href=""
+### Link (React in JSX | Vue in Vue Template)
+<a href="">some HTML</a> | <a :href="">some HTML</a>
 
-### Validator (React | Vue)
-{condition? (<some JSX>)} | v-if="condition"
+### Validator (React in JSX | Vue in Vue Template)
+{condition? (<some JSX>)} | <div v-if="condition">{some HTML}</div>
 
-### Input <input/> change handler (React | Vue)
-onChange={(e) => {setValue(e.target.value);}} | v-model="value"
+### Input change handler (React | Vue)
+<input onChange={(e) => {setValue(e.target.value)}} type=""/> | <input v-model="value" type=""/>
 
 ### State (React | Vue)
-[data, setData] = useState(""); | data(){ return { data:"", } }
+[data, setData] = useState(""); | data(){ return { data:"", } } or data: () => ({ data:"" })
 
-### Passing Data (React | Vue)
+### Set New Value in a State (React | VUe)
+setData(newValude) | this.data = newValue
+
+### Passing Data (React in JSX | Vue in Vue Template)
 { data } | {{ data }}
 
 ## Reference 
@@ -52,6 +55,7 @@ onChange={(e) => {setValue(e.target.value);}} | v-model="value"
 4.) Set v-model in checkbox array : https://www.nicesnippets.com/blog/vue-js-get-checked-value-of-checkbox-if-use-array-as-a-model
 5.) Using this.$router.push() in Nuxt.js : https://stackoverflow.com/questions/50375244/push-a-route-moving-from-vuejs-to-nuxtjs
 6.) Using redirect() : https://nuxtjs.org/docs/internals-glossary/context#redirect
+7.) Save token on local storage using Vue.js : https://stackoverflow.com/questions/64665017/how-to-save-simple-jwt-token-in-local-storage-using-vue-js-vuex-and-django-rest
 
 ## Error
 

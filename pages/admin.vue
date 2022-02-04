@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen bg-gradient-to-b from-slate-400 to-slate-500 pb-5 quicksand">
+  <div class="h-screen bg-gradient-to-b from-slate-300 to-slate-400 pb-5 quicksand">
     <div class='bg-slate-900 text-center text-white w-full'>
       Login Admin
     </div>
@@ -74,16 +74,16 @@ export default {
       await axios.post("http://localhost:5000/api/login",{
         email:this.email,
         password:this.password,
-      }).then(response => 
+      }).then(response => {
         // set token on localStorage
-        // (localStorage.setItem('token', response.data.token))
-        // this.$router.push('/admin')
+        (localStorage.setItem('token', response.data.token))
+        this.$router.push('/admin')
         // this.$nuxt.$options.router.push('/')
         // this.$router.push({ path: this.localePath('/') })
-        redirect('/')
-      ).catch(error => 
+        // redirect('/')
+      }).catch(error => {
         this.errorMessage = error.message
-      )
+      })
     }
   }
 }
@@ -97,8 +97,7 @@ footer{
   width:100%;
 }
 main{
-  padding-top:60px;
-  padding-bottom:120px;
+  padding-top:50px;
 }
 .quicksand {
   font-family: Quicksand, Arial, sans-serif;
