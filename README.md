@@ -23,55 +23,77 @@ For detailed explanation on how things work, check out the [documentation](https
 
 List of similiarities function or whatever it called that sometimes make me confused.
 
-### Looping inside component (React | Vue)
-data.map((i,index) => (<some JSX>)) | <div v-for="(i,index) in data">some HTML</div>
+### 1. Looping inside component (React | Vue)
+data.map((i,index) => (<some JSX>)) || <div v-for="(i,index) in data">some HTML</div>
 
-### Key for index (React | Vue)
-<div key={}>some HTML</div> | <div :key="">some HTML</div>
+### 2. Key for index (React | Vue)
+<div key={}>some HTML</div> || <div :key="">some HTML</div>
 
-### Link (React in JSX | Vue in Vue Template)
-<a href="">some HTML</a> | <a :href="">some HTML</a>
+### 3. Link (React in JSX | Vue in Vue Template)
+href="" || :href=""
 
-### Validator (React in JSX | Vue in Vue Template)
-{condition? (<some JSX>)} | <div v-if="condition">{some HTML}</div>
+### 4. Validator (React in JSX | Vue in Vue Template)
+{condition? ({some HTML})} || <div v-if="condition">{some HTML}</div>
 
-### Input change handler (React | Vue)
-<input onChange={(e) => {setValue(e.target.value)}} type=""/> | <input v-model="value" type=""/>
+### 5. Input change handler (React | Vue)
+<input onChange={(e) => {setValue(e.target.value)}} type=""/> || <input v-model="value" type=""/>
 
-### State (React | Vue)
-[data, setData] = useState(""); | data(){ return { data:"", } } or data: () => ({ data:"" })
+### 6. State (React | Vue)
+[data, setData] = useState(""); || data(){ return { data:"", } } or data: () => ({ data:"" })
 
-### Set New Value in a State (React | VUe)
-setData(newValude) | this.data = newValue
+### 7. Set New Value in a State (React | Vue)
+setData(newValude) || this.data = newValue
 
-### Passing Data (React in JSX | Vue in Vue Template)
-{ data } | {{ data }}
+### 8. Passing Data (React in JSX | Vue in Vue Template)
+{ data } || {{ data }}
 
 ## Reference 
 
-1.) Sticky Navbar : https://developer.mozilla.org/en-US/docs/Web/CSS/position
-2.) Set background color full screen height : https://www.geeksforgeeks.org/how-to-set-a-background-color-to-full-page-using-tailwind-css/
-3.) Using axios in Nuxt.js : https://axios.nuxtjs.org/options
-4.) Set v-model in checkbox array : https://www.nicesnippets.com/blog/vue-js-get-checked-value-of-checkbox-if-use-array-as-a-model
-5.) Using this.$router.push() in Nuxt.js : https://stackoverflow.com/questions/50375244/push-a-route-moving-from-vuejs-to-nuxtjs
-6.) Using redirect() : https://nuxtjs.org/docs/internals-glossary/context#redirect
-7.) Save token on local storage using Vue.js : https://stackoverflow.com/questions/64665017/how-to-save-simple-jwt-token-in-local-storage-using-vue-js-vuex-and-django-rest
+1. Create a sticky navbar : https://developer.mozilla.org/en-US/docs/Web/CSS/position
+
+2. Set background color full screen height : https://www.geeksforgeeks.org/how-to-set-a-background-color-to-full-page-using-tailwind-css/
+
+3. Using axios in Nuxt.js : https://axios.nuxtjs.org/options
+
+4. Set v-model in checkbox array : https://www.nicesnippets.com/blog/vue-js-get-checked-value-of-checkbox-if-use-array-as-a-model
+
+5. Using this.$router.push() in Nuxt.js : https://stackoverflow.com/questions/50375244/push-a-route-moving-from-vuejs-to-nuxtjs
+
+6. Using redirect() : https://nuxtjs.org/docs/internals-glossary/context#redirect
+
+7. Save token on local storage using Vue.js : https://stackoverflow.com/questions/64665017/how-to-save-simple-jwt-token-in-local-storage-using-vue-js-vuex-and-django-rest
 
 ## Error
 
 Error that I found when building this portfolio.
-1.) Problem : [Vue warn]: Avoid using non-primitive value as key, use string/number value instead
+
+1. Problem : [Vue warn]: Avoid using non-primitive value as key, use string/number value instead
+
 Solution : https://stackoverflow.com/questions/53420082/vue-warn-avoid-using-non-primitive-value-as-key-use-string-number-value-inst
-2.) Problem : Classname='' is not working in Nuxt.js
+
+2. Problem : Classname='' is not working in Nuxt.js
+
 Solution : Using Class='' instead.
-3.) Problem : bg-color tailwind is not working in Nuxt.js <main> tag
+
+3. Problem : bg-color tailwind is not working in Nuxt.js <main> tag
+
 Solution : https://stackoverflow.com/questions/65812581/tailwind-custom-colors-default-not-working
-4.) Problem : Using checkbox
+
+4. Problem : Using checkbox
+
 Solution : https://stackoverflow.com/questions/41001192/setting-a-checkbox-as-checked-with-vue-js
-5.) Problem : Created(){} in Nuxt.js error, but in Vue.js is not.
+
+5. Problem : Created(){} in Nuxt.js error, but in Vue.js is not.
+
 Solution : Just delete Created(){} in export default {} inside <script></script>
-6.) Problem : Cannot read properties of undefined (reading '$axios')
+
+6. Problem : Cannot read properties of undefined (reading '$axios')
+
 Solution : Delete $axios an replace with axios, also axios need to be imported as follow. Just add import axios from 'axios' inside <script></script>
+
+7. Problem : error: No Output Directory named "dist" found after the Build completed. You can configure the Output Directory in your Project Settings. Learn More: https://vercel.link/missing-public-directory
+
+Solution : https://medium.com/nerd-for-tech/how-to-deploy-a-nuxt-app-on-vercel-from-github-a7d4e9574ef2
 
 ## Special Directories
 
