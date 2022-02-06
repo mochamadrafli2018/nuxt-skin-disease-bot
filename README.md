@@ -19,33 +19,101 @@ $ npm run generate
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
-## Next.js (React Framework) and Nuxt.js (Vue Framework) Similarities
+## Next.js (React.js Framework) and Nuxt.js (Vue.js Framework) Similarities
 
 List of similiarities function or whatever it called that sometimes make me confused.
 
 ### 1. Looping inside component (React | Vue)
-data.map((i,index) => (<some JSX>)) || <div v-for="(i,index) in data">some HTML</div>
+
+--- in React ---
+
+`data.map((i,index) => (<some JSX>))`
+
+--- in Vue ---
+
+`<div v-for="(i,index) in data">some HTML</div>`
 
 ### 2. Key for index (React | Vue)
-<div key={}>some HTML</div> || <div :key="">some HTML</div>
+
+--- in React ---
+
+`<div key={}>some HTML</div>`
+
+--- in Vue ---
+
+`<div :key="">some HTML</div>`
 
 ### 3. Link (React in JSX | Vue in Vue Template)
-href="" || :href=""
+
+--- in React ---
+
+`href=""`
+
+--- in Vue ---
+
+`:href=""`
 
 ### 4. Validator (React in JSX | Vue in Vue Template)
-{condition? ({some HTML})} || <div v-if="condition">{some HTML}</div>
+
+--- in React ---
+
+`{isTrue? ({<div>some HTML</div>})}`
+
+--- in Vue ---
+
+`<div v-if="isTrue">{some HTML}</div>`
 
 ### 5. Input change handler (React | Vue)
-<input onChange={(e) => {setValue(e.target.value)}} type=""/> || <input v-model="value" type=""/>
+
+--- in React ---
+
+`<input value={email} onChange={(e) => {setEmail(e.target.value)}} type=""/> `
+
+--- in Vue ---
+
+`<input v-model="email" type=""/> `
+
+or 
+
+`<input v-on:change="email($event)" :value="email" />`
+
+or 
+
+`<input :value="email" @input="email = $event" />`
 
 ### 6. State (React | Vue)
-[data, setData] = useState(""); || data(){ return { data:"", } } or data: () => ({ data:"" })
+
+--- in React ---
+
+`const [data, setData] = useState("");`
+
+--- in Vue ---
+
+`data(){ return { data:"", } }`
+
+or
+
+`data: () => ({ data:"" })`
 
 ### 7. Set New Value in a State (React | Vue)
-setData(newValude) || this.data = newValue
+
+--- in React ---
+
+`setData(newValude)`
+
+--- in Vue ---
+
+`this.data = newValue`
 
 ### 8. Passing Data (React in JSX | Vue in Vue Template)
-{ data } || {{ data }}
+
+--- in React ---
+
+`{ data }`
+
+--- in Vue ---
+
+`{{ data }}`
 
 ## Reference 
 
@@ -94,6 +162,14 @@ Solution : Delete $axios an replace with axios, also axios need to be imported a
 7. Problem : error: No Output Directory named "dist" found after the Build completed. You can configure the Output Directory in your Project Settings. Learn More: https://vercel.link/missing-public-directory
 
 Solution : https://medium.com/nerd-for-tech/how-to-deploy-a-nuxt-app-on-vercel-from-github-a7d4e9574ef2
+
+8. Problem : Syntax Error: Unexpected token
+
+Solution : Check each pair of curly brackets in the function.
+
+9. Problem : localStorage is not defined in /pages/dashboard.vue
+
+Solution : https://stackoverflow.com/questions/52474208/react-localstorage-is-not-defined-error-showing
 
 ## Special Directories
 

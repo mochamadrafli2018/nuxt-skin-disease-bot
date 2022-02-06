@@ -278,9 +278,20 @@
       Submit
     </button>
     
+    <!-- Loading -->
     <hr class='my-2'/>
     <p class='my-2 text-center'>Hasil skrining penyakit mata : </p>
-    <p class='my-2'>{{ result }}</p>
+    <div class='flex flex-row justify-center my-2 space-x-2'>
+      <p v-if="resultLoading === true">
+        Processing...
+      </p>
+      <p v-else-if="resultLoading === false">
+        {{ result }}
+      </p>
+    </div>
+    <p v-if="errorResult !== null" class="my-2">
+      {{ errorResult }}
+    </p>
   </div>
 </template>
 
@@ -293,15 +304,19 @@ export default {
   data: () => ({
     selected: [],
     result: '',
+    resultLoading: false,
+    errorResult:''
   }),
   methods: {
-    async send() { //
+    async send() {
+      this.resultLoading = true;
       await axios.post('https://chatbot-backend-hapi.herokuapp.com', {
         selected: this.selected
       }).then((response) => {
-        this.result=response.data.diagnosis
+        this.resultLoading = false;
+        this.result = response.data.diagnosis;
       }).catch((error) => {
-        console.log(error)
+        this.errorResult = error.message;
       })
     }
   }
