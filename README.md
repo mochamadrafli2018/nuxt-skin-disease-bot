@@ -1,27 +1,49 @@
-# Nuxt-App Portfolio : Form Based Expert System for Eye Disease Screening System
+# Nuxt.js Portfolio : Form Based Expert System for Eye Disease Screening System
 
 ## Build Setup
 
 ```bash
 # install dependencies
 $ npm install
-
 # serve with hot reload at localhost:3000
 $ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
 ```
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+## List of Eye Disease in Inference Machine
 
-## Next.js (React.js Framework) and Nuxt.js (Vue.js Framework) Similarities
+1. Ablasi Retina
+2. Alergi Mata Merah
+3. Blefaritis
+4. Dakriosistitis
+5. Degenerasi Makula
+6. Eksoftalmus
+7. Endoftalmitis
+8. Glaukoma
+9. Hordeolum (Stye)
+10. Katarak
+11. Keratitis Pungtata Superfisialis
+12. Keratokonus
+13. Kalazion
+14. Konjungtivitis
+15. Miopi
+16. Oftalmia Neonatorium
+17. Optic Neuritis
+18. Pterygium
+19. Retinitis Pigmentosa
+20. Retinopati Diabetikum
+21. Selulitis Orbitalitas
+22. Trakoma
+23. Trombosis Sinus Kavernosus
+24. Ulkus Kornea
+25. Uveitis
+26. Xerophtalmania
+27. Skleritis
 
-List of similiarities function or whatever it called that sometimes make me confused.
+## Deployment
+
+This app was deployed on vercel.
+
+## Next.js (React.js Framework) and Nuxt.js (Vue.js Framework) Similarities Documentation
 
 ### 1. Looping inside component (React | Vue)
 
@@ -115,7 +137,7 @@ or
 
 `{{ data }}`
 
-## Reference 
+## List of Reference
 
 1. Create a sticky navbar : https://developer.mozilla.org/en-US/docs/Web/CSS/position
 
@@ -131,9 +153,7 @@ or
 
 7. Save token on local storage using Vue.js : https://stackoverflow.com/questions/64665017/how-to-save-simple-jwt-token-in-local-storage-using-vue-js-vuex-and-django-rest
 
-## Error
-
-Error that I found when building this portfolio.
+## Error Documentation
 
 1. Problem : [Vue warn]: Avoid using non-primitive value as key, use string/number value instead
 
@@ -170,52 +190,3 @@ Solution : Check each pair of curly brackets in the function.
 9. Problem : localStorage is not defined in /pages/dashboard.vue
 
 Solution : https://stackoverflow.com/questions/52474208/react-localstorage-is-not-defined-error-showing
-
-## Special Directories
-
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
-
-### `assets`
-
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
-
-### `components`
-
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
-
-### `layouts`
-
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
-
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
