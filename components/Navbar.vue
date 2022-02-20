@@ -15,7 +15,7 @@ export default {
     links: [
       {text:'Home',url:'/'},
       {text:'Panduan',url:'/guide'},
-      {text:'Admin',url:'/login'},
+      {text:'Login',url:'/login'},
     ],
   })
 }
