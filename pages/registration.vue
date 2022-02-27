@@ -28,7 +28,7 @@
         </div>
         <!-- Validation -->
         <div v-if="'nameEmpty' === true" 
-          className="border-2 border-red-300 bg-red-100 p-3 rounded"
+          class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
         >Nama harus di isi
         </div>
 
@@ -41,8 +41,8 @@
           />
         </div>
         <!-- Validation -->
-        <div v-if="$nuxt.emailEmpty === true" 
-          className="border-2 border-red-300 bg-red-100 p-3 rounded"
+        <div v-if="emailEmpty" 
+          class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
         >Email harus di isi
         </div>
 
@@ -56,8 +56,8 @@
           />
         </div>
         <!-- Validation -->
-        <div v-if="$nuxt.passwordEmpty === true" 
-          className="border-2 border-red-300 bg-red-100 p-3 rounded"
+        <div v-if="passwordEmpty" 
+          class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
         >Password harus di isi
         </div>
         
@@ -71,13 +71,13 @@
           />
         </div>
         <!-- Validation -->
-        <div v-if="$nuxt.passwordConfirmationEmpty === true" 
-          className="border-2 border-red-300 bg-red-100 p-3 rounded"
+        <div v-if="passwordConfirmationEmpty" 
+          class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
         >Konfirmasi password harus di isi
         </div>
         <!-- Validation -->
-        <div v-if="$nuxt.passwordConfirmationMatch === true" 
-          className="border-2 border-red-300 bg-red-100 p-3 rounded"
+        <div v-if="passwordConfirmationMatch" 
+          class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
         >Password tidak sama
         </div>
 
@@ -102,8 +102,8 @@
           </label>
         </div>
         <!-- Validation -->
-        <div v-if="$nuxt.roleNotChecked === true" 
-          className="border-2 border-red-300 bg-red-100 p-3 rounded"
+        <div v-if="roleNotChecked" 
+          class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
         >Klik pernyataan di atas
         </div>
         
@@ -113,14 +113,14 @@
           MASUK
         </button>
         <!-- Validation -->
-        <div v-if="$nuxt.send === true" 
-          className="border-2 border-red-300 bg-red-100 p-3 rounded"
+        <div v-if="send" 
+          class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
         >Tunggu sebentar...
         </div>
-        <div v-if="$nuxt.errorMessage === 'Request failed with status code 409'">
+        <div v-if="errorMessage === 'Request failed with status code 409'">
           Email terdaftar, tapi password salah.
         </div>
-        <div v-else-if="$nuxt.errorMessage === 'Request failed with status code 500'">
+        <div v-else-if="errorMessage === 'Request failed with status code 500'">
           Maaf email tidak terdaftar.
         </div>
         {{ checkRole }}
@@ -174,7 +174,8 @@ export default {
   },
   methods: {
     // user authorization
-    async registration() {
+    async registration(e) {
+      e.preventDefault();
       // validation after button was click
       if (!this.name) { this.nameEmpty = true; }
       if (!this.email) { this.emailEmpty = true; }
@@ -196,8 +197,6 @@ export default {
       ).then(response => {
         this.send = true;
         this.$router.push('/dashboard');
-        // this.$nuxt.$options.router.push('/')
-        // this.$router.push({ path: this.localePath('/') })
         // redirect('/')
       }).catch(error => {
         this.errorMessage = error.message;

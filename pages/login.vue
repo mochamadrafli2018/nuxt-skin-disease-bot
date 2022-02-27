@@ -26,9 +26,10 @@
           />
         </div>
         <!-- Validation -->
-        <div v-if="$nuxt.emailEmpty === true" 
-          className="border-2 border-red-300 bg-red-100 p-3 rounded"
-        >Email harus di isi
+        <div v-if="emailEmpty" 
+          class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
+        >
+          Email harus di isi
         </div>
 
         <div class='flex flex-col lg:my-3 md:my-3 sm:my-2'>
@@ -41,9 +42,10 @@
           />
         </div>
         <!-- Validation -->
-        <div v-if="$nuxt.passwordEmpty === true" 
-          className="border-2 border-red-300 bg-red-100 p-3 rounded"
-        >Password harus di isi
+        <div v-if="passwordEmpty" 
+          class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
+        >
+          Password harus di isi
         </div>
 
         <button class='bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-200 text-white mx-auto lg:my-3 md:my-3 sm:my-2 px-4 py-2 rounded w-full'
@@ -52,17 +54,19 @@
           MASUK
         </button>
         <!-- Validation -->
-        <div v-if="$nuxt.send === true" 
-          className="border-2 border-red-300 bg-red-100 p-3 rounded"
-        >Tunggu sebentar...
+        <div v-if="send"  
+          class="border-2 border-green-300 bg-green-100 p-3 rounded"
+        >
+          Tunggu sebentar...
         </div>
-        <!--<div v-if="$nuxt.errorMessage === Request failed with status code 409">
+        <div v-if="errorMessage === 'Request failed with status code 409'">
           Email terdaftar, tapi password salah.
         </div>
-        <div v-else-if="$nuxt.errorMessage === Request failed with status code 500">
+        <div v-else-if="errorMessage === 'Request failed with status code 500'">
           Maaf email tidak terdaftar.
-        </div>-->
+        </div>
         {{ errorMessage }}
+
         <hr class='my-2'/>
         <p>Belum punya akun? <a class='font-bold no-underline' href='/registration'>
           Daftar di sini</a>
@@ -99,25 +103,33 @@ export default {
   },
   methods: {
     // user authorization
-    async login() {
+    async login(e) {
+      e.preventDefault();
       if (!this.email) { this.emailEmpty = true; }
       if (!this.password) { this.passwordEmpty = true; }
+      else {
       // POST request using axios with error handling
       await axios.post("http://localhost:5000/api/login",
         ({
-          email:this.email,
-          password:this.password,
+          email: this.email,
+          password: this.passwordEmpty,
         })
       ).then(response => {
         // set token on local storage
         (localStorage.setItem('token', response.data.token));
         this.$router.push('/admin');
-        // this.$nuxt.$options.router.push('/')
-        // this.$router.push({ path: this.localePath('/') })
       }).catch(error => {
         this.errorMessage = error.message;
-      })
+      })}
     }
+  },
+  watch: {
+    email(val) {
+      this.emailEmpty = false;
+    },
+    password(val) {
+      this.passwordEmpty = false;
+    },
   }
 }
 </script>
