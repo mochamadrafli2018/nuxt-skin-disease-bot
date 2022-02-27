@@ -27,7 +27,7 @@
           />
         </div>
         <!-- Validation -->
-        <div v-if="'nameEmpty' === true" 
+        <div v-if="nameEmpty" 
           class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
         >Nama harus di isi
         </div>
@@ -186,21 +186,26 @@ export default {
       if (this.checkRole === true) { role = 'user'; }
       if (this.checkRole === false) { role = 'admin'; }
       // POST request using axios with error handling
-      await axios.post("http://localhost:5000/api/registration",
-        ({
-          name:this.name,
-          email:this.email,
-          password:this.password,
-          gender:this.gender,
-          role:this.role
+      else if (
+        this.name && this.email && this.password && this.passwordConfirmation 
+        && this.passwordConfirmation === this.password && this.checkRole
+      ) {
+        await axios.post("http://localhost:5000/api/registration",
+          ({
+            name:this.name,
+            email:this.email,
+            password:this.password,
+            gender:this.gender,
+            role:this.role
+          })
+        ).then(response => {
+          this.send = true;
+          this.$router.push('/dashboard');
+          // redirect('/')
+        }).catch(error => {
+          this.errorMessage = error.message;
         })
-      ).then(response => {
-        this.send = true;
-        this.$router.push('/dashboard');
-        // redirect('/')
-      }).catch(error => {
-        this.errorMessage = error.message;
-      })
+      }
     }
   }
 }

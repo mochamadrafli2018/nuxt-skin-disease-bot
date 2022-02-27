@@ -54,7 +54,7 @@
           MASUK
         </button>
         <!-- Validation -->
-        <div v-if="send"  
+        <div v-if="send"
           class="border-2 border-green-300 bg-green-100 p-3 rounded"
         >
           Tunggu sebentar...
@@ -107,20 +107,21 @@ export default {
       e.preventDefault();
       if (!this.email) { this.emailEmpty = true; }
       if (!this.password) { this.passwordEmpty = true; }
-      else {
-      // POST request using axios with error handling
-      await axios.post("http://localhost:5000/api/login",
-        ({
-          email: this.email,
-          password: this.passwordEmpty,
+      else if (this.email && this.password) {
+        // POST request using axios with error handling
+        await axios.post("http://localhost:5000/api/login",
+          ({
+            email: this.email,
+            password: this.passwordEmpty,
+          })
+        ).then(response => {
+          // set token on local storage
+          (localStorage.setItem('token', response.data.token));
+          this.$router.push('/admin');
+        }).catch(error => {
+          this.errorMessage = error.message;
         })
-      ).then(response => {
-        // set token on local storage
-        (localStorage.setItem('token', response.data.token));
-        this.$router.push('/admin');
-      }).catch(error => {
-        this.errorMessage = error.message;
-      })}
+      }
     }
   },
   watch: {
