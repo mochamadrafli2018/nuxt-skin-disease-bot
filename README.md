@@ -133,7 +133,7 @@ or
 
 - Parent Component
 
-`
+```bash
 import ComponentName from 'ComponentName.js'
 
 export default function App() {
@@ -141,11 +141,11 @@ export default function App() {
     <ComponentName title = {"Understanding Props in vuejs"} subtitle = {"Content from props..."}>
   )
 )
-`
+```
 
 - Child Component
 
-`
+```bash
 export default function ComponentName({ title, subtitle }) {
   return (
     <div>
@@ -154,13 +154,13 @@ export default function ComponentName({ title, subtitle }) {
     </div>
   )
 )
-`
+```
 
 --- in React Class Component
 
 - Parent Component
 
-`
+```bash
 import ComponentName from 'ComponentName.js'
 
 class App extends React.Component {
@@ -170,11 +170,11 @@ class App extends React.Component {
     )
   }
 )
-`
+```
 
 - Child Component
 
-`
+```bash
 class ComponentName extends React.Component {
   render() {
     return (
@@ -186,20 +186,21 @@ class ComponentName extends React.Component {
   }
 )
 export default ComponentName;
-`
+```
 
 --- in Vue ---
 
 - Parent Component (Static Value)
 
-`
+```bash
 <template>
   <ComponentName title="Understanding Props in vuejs" />
 </template>
-`
+```
 
 - Parent Component (Dynamic Value)
-`
+
+```bash
 <template>
   <ComponentName :title=title />
 </template>
@@ -214,15 +215,15 @@ export default {
   //...
 }
 </script>
-`
+```
 
 - Child Component named ComponentName.js
 
-`
+```bash
 <template>
   <h3 class='text-center'>{{ title }}</h3>
 </template>
-`
+```
 
 ### 9. Props (Passing Data in Component)
 
