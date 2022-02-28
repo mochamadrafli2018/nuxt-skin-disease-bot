@@ -6,7 +6,7 @@
 
     <Navbar class='z-20'/>
     
-    <main class='max-w-4xl mx-auto sm:px-6 lg:px-8'>
+    <main class='max-w-4xl mx-auto mt-8 sm:px-6 lg:px-8'>
       <v-expansion-panels class="pb-5 px-6 z-10">
         <v-expansion-panel v-for="(item,index) in guides" :key="index" 
         class='my-1 rounded'>
@@ -84,9 +84,6 @@ footer{
   position:fixed;
   bottom:0;
   width:100%;
-}
-main{
-  padding-top:50px;
 }
 .quicksand {
   font-family: Quicksand, Arial, sans-serif;

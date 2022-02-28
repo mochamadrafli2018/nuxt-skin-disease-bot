@@ -45,7 +45,7 @@ This app was deployed on vercel.
 
 ## Next.js (React.js Framework) and Nuxt.js (Vue.js Framework) Similarities Documentation
 
-### 1. Looping inside component (React | Vue)
+### 1. Looping inside component
 
 --- in React ---
 
@@ -55,7 +55,7 @@ This app was deployed on vercel.
 
 `<div v-for="(i,index) in data">some HTML</div>`
 
-### 2. Key for index (React | Vue)
+### 2. Key for index
 
 --- in React ---
 
@@ -65,7 +65,7 @@ This app was deployed on vercel.
 
 `<div :key="">some HTML</div>`
 
-### 3. Link (React in JSX | Vue in Vue Template)
+### 3. Link
 
 --- in React ---
 
@@ -75,7 +75,7 @@ This app was deployed on vercel.
 
 `:href=""`
 
-### 4. Validator (React in JSX | Vue in Vue Template)
+### 4. Validator
 
 --- in React ---
 
@@ -85,7 +85,7 @@ This app was deployed on vercel.
 
 `<div v-if="isTrue">{some HTML}</div>`
 
-### 5. Input change handler (React | Vue)
+### 5. Input change handler
 
 --- in React ---
 
@@ -103,39 +103,128 @@ or
 
 `<input :value="email" @input="email = $event" />`
 
-### 6. State (React | Vue)
+### 6. State
 
 --- in React ---
 
-`const [data, setData] = useState("");`
+`const [title, setTitle] = useState("");`
 
 --- in Vue ---
 
-`data(){ return { data:"", } }`
+`data(){ return { title:"", } }`
 
 or
 
-`data: () => ({ data:"" })`
+`data: () => ({ title:"", })`
 
-### 7. Set New Value in a State (React | Vue)
-
---- in React ---
-
-`setData(newValude)`
-
---- in Vue ---
-
-`this.data = newValue`
-
-### 8. Passing Data (React in JSX | Vue in Vue Template)
+### 7. Set New Value in a State
 
 --- in React ---
 
-`{ data }`
+`setTitle('some_string')`
 
 --- in Vue ---
 
-`{{ data }}`
+`this.title = 'some_string'`
+
+### 8. Passing Data in Component (Props)
+
+--- in React Functional Component
+
+- Parent Component
+
+`
+import ComponentName from 'ComponentName.js'
+
+export default function App() {
+  return (
+    <ComponentName title = {"Understanding Props in vuejs"} subtitle = {"Content from props..."}>
+  )
+)
+`
+
+- Child Component
+
+`
+export default function ComponentName({ title, subtitle }) {
+  return (
+    <div>
+      <p className='text-center'>{ title }</p>
+      <p className='text-center'>{ subtitle }</p>
+    </div>
+  )
+)
+`
+
+--- in React Class Component
+
+- Parent Component
+
+`
+import ComponentName from 'ComponentName.js'
+
+class App extends React.Component {
+  render() {
+    return (
+      <ComponentName title = "Understanding Props in reactjs" subtitle = "Content from props...">
+    )
+  }
+)
+`
+
+- Child Component
+
+`
+class ComponentName extends React.Component {
+  render() {
+    return (
+      <div>
+        <p className='text-center'>{ this.props.title }</p>
+        <p className='text-center'>{ this.props.subtitle }</p>
+      </div>
+    )
+  }
+)
+export default ComponentName;
+`
+
+--- in Vue ---
+
+- Parent Component (Static Value)
+
+`
+<template>
+  <ComponentName title="Understanding Props in vuejs" />
+</template>
+`
+
+- Parent Component (Dynamic Value)
+`
+<template>
+  <ComponentName :title=title />
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      title: 'Understanding Props in vuejs'
+    }
+  },
+  //...
+}
+</script>
+`
+
+- Child Component named ComponentName.js
+
+`
+<template>
+  <h3 class='text-center'>{{ title }}</h3>
+</template>
+`
+
+### 9. Props (Passing Data in Component)
 
 ## List of Reference
 

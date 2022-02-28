@@ -2,7 +2,7 @@
   <div class="h-screen bg-gradient-to-b from-slate-300 to-slate-400 pb-5 quicksand">
     
     <div class='bg-slate-900 text-center text-white w-full'>
-      Login Admin
+      Login User
     </div>
 
     <nav class='nav flex flex-row justify-center m-0 py-1 px-0 top-0 shadow space-x-5 text-white'>
@@ -13,9 +13,9 @@
       </a>
     </nav>
 
-    <main class="bg-slate-900 max-w-md mx-auto mt-8 lg:p-7 md:p-5 sm:p-3 rounded-xl text-white">
+    <main class="bg-slate-900 max-w-md mx-auto mt-8 lg:p-7 md:p-6 sm:p-5 rounded-xl text-white">
       <form onSubmit={}>
-        <h3 class='font-bold mb-2'>Login Pengguna</h3>
+        <h3 class='font-bold text-3xl'>Login Pengguna</h3>
         <p>Silahkan login dengan isi data berikut.</p>
         <div class='flex flex-col lg:my-3 md:my-3 sm:my-2'>
           <label>Email</label>
@@ -68,8 +68,8 @@
         {{ errorMessage }}
 
         <hr class='my-2'/>
-        <p>Belum punya akun? <a class='font-bold no-underline' href='/registration'>
-          Daftar di sini</a>
+        <p>Belum punya akun? Daftar <a class='font-bold underline' href='/registration'>
+          di sini</a>
         </p>
       </form>
     </main>
@@ -125,6 +125,7 @@ export default {
     }
   },
   watch: {
+    // whenever data in v-model changes, this function will run
     email(val) {
       this.emailEmpty = false;
     },
@@ -137,9 +138,6 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap");
-main{
-  padding-top:50px;
-}
 .quicksand {
   font-family: Quicksand, Arial, sans-serif;
 }

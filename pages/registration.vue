@@ -13,7 +13,7 @@
       </a>
     </nav>
 
-    <main class="bg-slate-900 max-w-md mx-auto mt-8 lg:p-7 md:p-5 sm:p-3 rounded-xl text-white">
+    <main class="bg-slate-900 max-w-md mx-auto mt-8 lg:p-7 md:p-6 sm:p-5 rounded-xl text-white">
       <form onSubmit={}>
         <h3 class='font-bold text-3xl'>Registrasi Pengguna Baru</h3>
         <p>Mohon isi data berikut dengan benar.</p>
@@ -125,8 +125,8 @@
         </div>
         {{ checkRole }}
         <hr class='my-2'/>
-        <p>Belum punya akun? <a class='font-bold no-underline' href='/login'>
-          Daftar di sini</a>
+        <p>Sudah punya akun? Masuk <a class='font-bold underline' href='/login'>
+          di sini</a>
         </p>
       </form>
     </main>
@@ -166,12 +166,6 @@ export default {
       ],
     }
   },
-  watch: {
-    // whenever data in v-model changes, this function will run
-    name: function() {
-      this.nameEmpty = false;
-    },
-  },
   methods: {
     // user authorization
     async registration(e) {
@@ -207,15 +201,30 @@ export default {
         })
       }
     }
-  }
+  },
+  watch: {
+    // whenever data in v-model changes, this function will run
+    name: function() {
+      this.nameEmpty = false;
+    },
+    email: function() {
+      this.emailEmpty = false;
+    },
+    password(val) {
+      this.passwordEmpty = false;
+    },
+    passwordConfirmation(val) {
+      this.passwordConfirmationEmpty = false;
+    },
+    checkRole(val) {
+      this.roleNotChecked = false;
+    }
+  },
 }
 </script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap");
-main{
-  padding-top:50px;
-}
 .quicksand {
   font-family: Quicksand, Arial, sans-serif;
 }
