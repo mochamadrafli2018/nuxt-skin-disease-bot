@@ -147,7 +147,7 @@ export default {
       password:'',
       passwordConfirmation:'',
       gender:'male',
-      checkRole:'',
+      checkRole:false,
       errorMessage:'',
       role:'',
       send:false,
@@ -176,14 +176,13 @@ export default {
       if (!this.password) { this.passwordEmpty = true; }
       if (!this.passwordConfirmation) { this.passwordConfirmationEmpty = true; }
       if (this.passwordConfirmation !== this.password) { this.passwordConfirmationMatch = true; }
-      if (!this.checkRole) { this.roleNotChecked = true; }
-      if (this.checkRole === true) { role = 'user'; }
-      if (this.checkRole === false) { role = 'admin'; }
+      if (this.checkRole === false) { this.roleNotChecked = true; }
       // POST request using axios with error handling
       else if (
         this.name && this.email && this.password && this.passwordConfirmation 
         && this.passwordConfirmation === this.password && this.checkRole
       ) {
+        if (this.checkRole === true) { this.role = 'user'; }
         await axios.post("http://localhost:5000/api/registration",
           ({
             name:this.name,
@@ -215,6 +214,7 @@ export default {
     },
     passwordConfirmation(val) {
       this.passwordConfirmationEmpty = false;
+      this.passwordConfirmationMatch = false;
     },
     checkRole(val) {
       this.roleNotChecked = false;
