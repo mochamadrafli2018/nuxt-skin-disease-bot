@@ -49,83 +49,117 @@ This app was deployed on vercel.
 
 --- in React ---
 
-`data.map((i,index) => (<some JSX>))`
+```bash
+data.map((i,index) => (<some JSX>))
+```
 
 --- in Vue ---
 
-`<div v-for="(i,index) in data">some HTML</div>`
+```bash
+<div v-for="(i,index) in data">some HTML</div>
+```
 
 ### 2. Key for index
 
 --- in React ---
 
-`<div key={}>some HTML</div>`
+```bash
+<div key={}>some HTML</div>
+```
 
 --- in Vue ---
 
-`<div :key="">some HTML</div>`
+```bash
+<div :key="">some HTML</div>
+```
 
 ### 3. Link
 
 --- in React ---
 
-`href=""`
+```bash
+href=""
+```
 
 --- in Vue ---
 
-`:href=""`
+```bash
+:href=""
+```
 
 ### 4. Validator
 
 --- in React ---
 
-`{isTrue? ({<div>some HTML</div>})}`
+```bash
+{isTrue? ({<div>some HTML</div>})}
+```
 
 --- in Vue ---
 
-`<div v-if="isTrue">{some HTML}</div>`
+```bash
+<div v-if="isTrue">{some HTML}</div>
+```
 
 ### 5. Input change handler
 
 --- in React ---
 
-`<input value={email} onChange={(e) => {setEmail(e.target.value)}} type=""/> `
+```bash
+<input value={email} onChange={(e) => {setEmail(e.target.value)}} type=""/>
+```
 
 --- in Vue ---
 
-`<input v-model="email" type=""/> `
+```bash
+<input v-model="email" type=""/> 
+```
 
 or 
 
-`<input v-on:change="email($event)" :value="email" />`
+```bash
+<input v-on:change="email($event)" :value="email" />
+```
 
 or 
 
-`<input :value="email" @input="email = $event" />`
+```bash
+<input :value="email" @input="email = $event" />
+```
 
 ### 6. State
 
 --- in React ---
 
-`const [title, setTitle] = useState("");`
+```bash
+const [title, setTitle] = useState("");
+```
 
 --- in Vue ---
 
-`data(){ return { title:"", } }`
+```bash
+data(){ return { title:"", } }
+```
 
 or
 
-`data: () => ({ title:"", })`
+```bash
+data: () => ({ title:"", })
+```
 
 ### 7. Set New Value in a State
 
 --- in React ---
 
-`setTitle('some_string')`
+```bash
+setTitle('some_string')
+```
 
 --- in Vue ---
 
-`this.title = 'some_string'`
+```bash
+this.title = 'some_string'
+```
 
 ### 8. Passing Data in Component (Props)
 
@@ -225,8 +259,6 @@ export default {
 </template>
 ```
 
-### 9. Props (Passing Data in Component)
-
 ## List of Reference
 
 1. Create a sticky navbar : https://developer.mozilla.org/en-US/docs/Web/CSS/position
@@ -242,6 +274,10 @@ export default {
 6. Using redirect() : https://nuxtjs.org/docs/internals-glossary/context#redirect
 
 7. Save token on local storage using Vue.js : https://stackoverflow.com/questions/64665017/how-to-save-simple-jwt-token-in-local-storage-using-vue-js-vuex-and-django-rest
+
+8. Props in react.js : https://www.freecodecamp.org/news/react-components-jsx-props-for-beginners/
+
+9. Props in vue.js : https://www.freecodecamp.org/news/how-to-use-props-in-vuejs/
 
 ## Error Documentation
 
