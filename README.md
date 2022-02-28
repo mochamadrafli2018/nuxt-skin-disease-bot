@@ -127,7 +127,68 @@ or
 <input :value="email" @input="email = $event" />
 ```
 
-### 6. State
+### 6. Watcher
+
+--- in React ---
+
+```bash
+// App.jsx
+import React, { useState } from 'react'
+
+export default function App() {
+  const [title, setTitle] = useState('');
+  const [validation ,setValidation] = useState(false);
+
+  return (
+    <div>
+      <input
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      {validation === true && (
+        <p className='bg-red-100 text-black'>Input must be filled</p>
+      )}
+    </div>
+  )
+}
+```
+
+--- in Vue ---
+
+```bash
+// App.vue
+<template>
+  <div>
+    <input
+      v-model="title"
+      placeholder='Input a string'
+    />
+    <div v-if="titleEmpty" class="border-red-300 text-black">
+      Title must be filled
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      title: '',
+      titleEmpty = true,
+    }
+  },
+  watch: {
+    // whenever data in v-model changes, this function will run
+    title: function() {
+      this.titleEmpty = false;
+    },
+  }
+  //...
+}
+</script>
+```
+
+### 7. State
 
 --- in React ---
 
@@ -147,7 +208,7 @@ or
 data: () => ({ title:"", })
 ```
 
-### 7. Set New Value in a State
+### 8. Set New Value in a State
 
 --- in React ---
 
@@ -161,7 +222,7 @@ setTitle('some_string')
 this.title = 'some_string'
 ```
 
-### 8. Passing Data in Component (Props)
+### 9. Passing Data in Component (Props)
 
 --- in React Functional Component
 
