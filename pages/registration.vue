@@ -60,7 +60,11 @@
           class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
         >Password harus di isi
         </div>
-        
+        <div v-if="passwordIsTooShort" 
+          class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
+        >Password terlalu pendek
+        </div>
+
         <div class='flex flex-col lg:my-3 md:my-3 sm:my-2'>
           <label>Konfirmasi password</label>
           <input
@@ -146,18 +150,19 @@ export default {
       email:'',
       password:'',
       passwordConfirmation:'',
-      gender:'male',
-      checkRole:false,
+      gender: 'male',
+      checkRole: false,
       errorMessage:'',
       role:'',
-      send:false,
+      send: false,
       // validation
-      nameEmpty:false,
-      emailEmpty:false,
-      passwordEmpty:false,
-      passwordConfirmationEmpty:false,
-      passwordConfirmationMatch:false,
-      roleNotChecked:false,
+      nameEmpty: false,
+      emailEmpty: false,
+      passwordEmpty: false,
+      passwordIsTooShort: false,
+      passwordConfirmationEmpty: false,
+      passwordConfirmationMatch: false,
+      roleNotChecked: false,
       // component data
       links: [
         {text:'Home',url:'/'},
@@ -174,6 +179,7 @@ export default {
       if (!this.name) { this.nameEmpty = true; }
       if (!this.email) { this.emailEmpty = true; }
       if (!this.password) { this.passwordEmpty = true; }
+      if (password.length > 0 && password.length < 8) { this.passwordIsTooShort = true; }
       if (!this.passwordConfirmation) { this.passwordConfirmationEmpty = true; }
       if (this.passwordConfirmation !== this.password) { this.passwordConfirmationMatch = true; }
       if (this.checkRole === false) { this.roleNotChecked = true; }
@@ -211,6 +217,7 @@ export default {
     },
     password(val) {
       this.passwordEmpty = false;
+      this.passwordIsTooShort = false;
     },
     passwordConfirmation(val) {
       this.passwordConfirmationEmpty = false;
