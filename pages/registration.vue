@@ -170,7 +170,7 @@ export default {
     // user authorization
     async registration(e) {
       e.preventDefault();
-      // validation after button was click
+      // validation after button was clicked
       if (!this.name) { this.nameEmpty = true; }
       if (!this.email) { this.emailEmpty = true; }
       if (!this.password) { this.passwordEmpty = true; }

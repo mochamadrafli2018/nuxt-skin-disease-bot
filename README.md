@@ -137,17 +137,28 @@ import React, { useState } from 'react'
 
 export default function App() {
   const [title, setTitle] = useState('');
-  const [validation ,setValidation] = useState(false);
+  const [titleEmpty ,setTitleEmpty] = useState(false);
+
+  function send() {
+    // validation after button was clicked
+    if (!title) { 
+      setTitleEmpty(true);
+    }
+  }
 
   return (
     <div>
       <input
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => {
+          setTitle(e.target.value);
+          setTitleEmpty(false);
+        }
       />
-      {validation === true && (
+      {titleEmpty === true && (
         <p className='bg-red-100 text-black'>Input must be filled</p>
       )}
+      <button onClick={send}>Send</button>
     </div>
   )
 }
@@ -166,6 +177,7 @@ export default function App() {
     <div v-if="titleEmpty" class="border-red-300 text-black">
       Title must be filled
     </div>
+    <button @click='send'>Send</button>
   </div>
 </template>
 
@@ -174,7 +186,15 @@ export default {
   data() {
     return {
       title: '',
-      titleEmpty = true,
+      titleEmpty = false,
+    }
+  },
+  methods: {
+    send() {
+      // validation after button was clicked
+      if (!this.title) { 
+        this.titleEmpty = true;
+      }
     }
   },
   watch: {
