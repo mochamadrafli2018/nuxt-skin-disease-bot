@@ -13,7 +13,7 @@
       </a>
     </nav>
 
-    <main class="bg-slate-900 max-w-md mx-auto mt-8 lg:p-7 md:p-6 sm:p-5 rounded-xl text-white">
+    <main class="bg-slate-900 max-w-md mx-auto mt-8 lg:p-7 md:p-5 sm:p-5 rounded-xl text-white">
       <form onSubmit={}>
         <h3 class='font-bold text-3xl'>Registrasi Pengguna Baru</h3>
         <p>Mohon isi data berikut dengan benar.</p>
@@ -112,22 +112,21 @@
         </div>
         
         <button class='bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-200 text-white mx-auto lg:my-3 md:my-3 sm:my-2 px-4 py-2 rounded w-full'
-          @click='registration'
+          @click='register' type='button'
         >
-          MASUK
+          DAFTAR
         </button>
         <!-- Validation -->
         <div v-if="send" 
           class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
         >Tunggu sebentar...
         </div>
-        <div v-if="errorMessage === 'Request failed with status code 409'">
-          Email terdaftar, tapi password salah.
+        <div v-if="errorMessage === 'Request failed with status code 409'"
+          class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
+        >Email sudah terdaftar, silahkan masuk.
         </div>
-        <div v-else-if="errorMessage === 'Request failed with status code 500'">
-          Maaf email tidak terdaftar.
-        </div>
-        {{ checkRole }}
+        <!--{{ errorMessage }}-->
+
         <hr class='my-2'/>
         <p>Sudah punya akun? Masuk <a class='font-bold underline' href='/login'>
           di sini</a>
@@ -142,7 +141,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'IndexPage',
+  name: 'RegisterPage',
   data () {
     return {
       // initial state
@@ -151,9 +150,9 @@ export default {
       password:'',
       passwordConfirmation:'',
       gender: 'male',
+      role:'',
       checkRole: false,
       errorMessage:'',
-      role:'',
       send: false,
       // validation
       nameEmpty: false,
@@ -166,42 +165,44 @@ export default {
       // component data
       links: [
         {text:'Home',url:'/'},
-        {text:'Daftar',url:'/registration'},
+        {text:'Daftar',url:'/register'},
         {text:'Masuk',url:'/login'},
       ],
     }
   },
   methods: {
     // user authorization
-    async registration(e) {
-      e.preventDefault();
+    register() {
+      // to prevent auto refresh browser when button was clicked
+      // e.preventDefault(); or type='button' in <button>
       // validation after button was clicked
       if (!this.name) { this.nameEmpty = true; }
       if (!this.email) { this.emailEmpty = true; }
       if (!this.password) { this.passwordEmpty = true; }
-      if (password.length > 0 && password.length < 8) { this.passwordIsTooShort = true; }
+      if (this.password.length > 0 && this.password.length < 8) { this.passwordIsTooShort = true; }
       if (!this.passwordConfirmation) { this.passwordConfirmationEmpty = true; }
       if (this.passwordConfirmation !== this.password) { this.passwordConfirmationMatch = true; }
       if (this.checkRole === false) { this.roleNotChecked = true; }
       // POST request using axios with error handling
-      else if (
-        this.name && this.email && this.password && this.passwordConfirmation 
-        && this.passwordConfirmation === this.password && this.checkRole
-      ) {
-        if (this.checkRole === true) { this.role = 'user'; }
-        await axios.post("http://localhost:5000/api/registration",
+      else if (this.name && this.email && this.password && this.password.length > 8
+        && this.passwordConfirmation && this.passwordConfirmation === this.password
+        && this.checkRole === true
+      ){
+        this.send = true;
+        this.role = 'member';
+        axios.post("http://localhost:5000/api/register",
           ({
             name:this.name,
             email:this.email,
-            password:this.password,
+            password:'Ugm412596',
             gender:this.gender,
             role:this.role
           })
         ).then(response => {
-          this.send = true;
-          this.$router.push('/dashboard');
+          this.$router.push('/login');
           // redirect('/')
         }).catch(error => {
+          this.send = false;
           this.errorMessage = error.message;
         })
       }

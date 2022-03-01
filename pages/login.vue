@@ -13,7 +13,7 @@
       </a>
     </nav>
 
-    <main class="bg-slate-900 max-w-md mx-auto mt-8 lg:p-7 md:p-6 sm:p-5 rounded-xl text-white">
+    <main class="bg-slate-900 max-w-md mx-auto mt-8 lg:p-7 md:p-5 sm:p-5 rounded-xl text-white">
       <form onSubmit={}>
         <h3 class='font-bold text-3xl'>Login Pengguna</h3>
         <p>Silahkan login dengan isi data berikut.</p>
@@ -49,7 +49,7 @@
         </div>
 
         <button class='bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-200 text-white mx-auto lg:my-3 md:my-3 sm:my-2 px-4 py-2 rounded w-full'
-          @click='login'
+          @click='login' type='button'
         >
           MASUK
         </button>
@@ -59,16 +59,18 @@
         >
           Tunggu sebentar...
         </div>
-        <div v-if="errorMessage === 'Request failed with status code 409'">
-          Email terdaftar, tapi password salah.
+        <div v-if="errorMessage === 'Request failed with status code 409'"
+          class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
+        >Email terdaftar, tapi password salah.
         </div>
-        <div v-else-if="errorMessage === 'Request failed with status code 500'">
-          Maaf email tidak terdaftar.
+        <div v-if="errorMessage === 'Request failed with status code 500'"
+          class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
+        >Email tidak terdaftar, silahkan daftar terlebih dahulu.
         </div>
-        {{ errorMessage }}
+        <!--{{ errorMessage }}-->
 
         <hr class='my-2'/>
-        <p>Belum punya akun? Daftar <a class='font-bold underline' href='/registration'>
+        <p>Belum punya akun? Daftar <a class='font-bold underline' href='/register'>
           di sini</a>
         </p>
       </form>
@@ -81,7 +83,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'IndexPage',
+  name: 'LoginPage',
   data () {
     return {
       // initial state
@@ -89,36 +91,36 @@ export default {
       password:'',
       errorMessage:'',
       send:false,
-      token:'',
       // validation
       emailEmpty:false,
       passwordEmpty:false,
       // component data
       links: [
         {text:'Home',url:'/'},
-        {text:'Daftar',url:'/registration'},
+        {text:'Daftar',url:'/register'},
         {text:'Masuk',url:'/login'},
       ],
     }
   },
   methods: {
     // user authorization
-    async login(e) {
-      e.preventDefault();
+    async login() {
       if (!this.email) { this.emailEmpty = true; }
       if (!this.password) { this.passwordEmpty = true; }
       else if (this.email && this.password) {
+        this.send = true
         // POST request using axios with error handling
         await axios.post("http://localhost:5000/api/login",
           ({
             email: this.email,
-            password: this.passwordEmpty,
+            password: this.password,
           })
         ).then(response => {
           // set token on local storage
           (localStorage.setItem('token', response.data.token));
-          this.$router.push('/admin');
+          this.$router.push('/register');
         }).catch(error => {
+          this.send = false;
           this.errorMessage = error.message;
         })
       }
