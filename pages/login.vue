@@ -118,7 +118,7 @@ export default {
         ).then(response => {
           // set token on local storage
           (localStorage.setItem('token', response.data.token));
-          this.$router.push('/register');
+          this.$router.push('/dashboard');
         }).catch(error => {
           this.send = false;
           this.errorMessage = error.message;
