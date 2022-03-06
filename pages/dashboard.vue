@@ -1,58 +1,47 @@
 <template>
-  <div class="h-screen bg-gradient-to-b from-slate-300 to-slate-400 pb-5 quicksand">
+  <div class="bg-gradient-to-b from-slate-300 to-slate-400 quicksand">
+  
     <div class='bg-slate-900 text-center text-white w-full'>
-      Admin Dashboard
+      Halo, <span class='font-bold underline'>{{ user.name }}</span>
     </div>
 
-    <nav class='nav flex flex-row m-0 py-1 px-2 top-0 shadow text-white'>
-      <p class='mr-auto font-bold my-auto text-black text-xl'>
-        Halo, <span class='font-bold underline'>{{ user.name }}</span>
-      </p>
+    <nav class='nav flex flex-row m-0 py-1 px-2 shadow text-white'>
+      <div class='flex flex-row justify-center space-x-5'>
+        <a href="/dashboard">
+          <p class="font-bold bg-green-500 hover:bg-green-600 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg">
+            Dashboard
+          </p>
+        </a>
+        <a href="/guide_copy">
+          <p class="font-bold bg-green-500 hover:bg-green-600 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg">
+            Panduan
+          </p>
+        </a>
+      </div>
       <button 
-        class="ml-auto font-bold bg-red-500 hover:bg-red-600 focus:bg-red-700 no-underline my-0 px-3 py-2 rounded-lg"
+        class="mr-auto font-bold bg-red-500 hover:bg-red-600 focus:bg-red-700 no-underline my-0 px-3 py-2 rounded-lg"
         @click="logoutHandler"
       >
         Logout
       </button>
     </nav>
 
-    <main>
-      <p class='text-2xl text-center text-black'>Dashboard</p>
-      <form onSubmit={} class="bg-slate-900 max-w-md mx-auto p-4 rounded-lg text-white">
-        <p class='font-bold mb-2 text-2xl'>
-          Tambah atau Ubah Data
+    <main class="max-w-4xl mx-auto mt-8 px-2">
+      <p class="font-semibold text-black my-2 lg:text-3xl md:lg:text-3xl sm:text-2xl text-center leading-7">
+        Web App Skrining Penyakit Mata berbasis Form
+      </p>
+      <!-- Form -->
+      <div class="bg-slate-900 mt-5 px-6 pb-3 overflow-hidden rounded-lg">
+        <p class="my-2 text-xl text-center text-white">
+          Pilih Beberapa Gejala Penyakit Mata di Bawah ini
         </p>
-        <hr class='my-2'/>
-        <div class='flex flex-col my-2'>
-          <label>Rule Base</label>
-          <input
-            v-model="ruleBase"
-            class='bg-slate-100 border-2 border-green-500 hover:border-green-600 px-2 py-1 rounded text-black' 
-            placeholder='Masukkan Alamat Email'
-          />
-        </div>
-        <div class='flex flex-col mt-2 mb-3'>
-          <label>Nama Penyakit</label>
-          <input
-            v-model="disease"
-            class='bg-slate-100 border-2 border-green-500 hover:border-green-600 px-2 py-1 rounded text-black' 
-            placeholder='Masukkan Password'
-          />
-        </div>
-        <hr class='my-2'/>
-        <button class='bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-200 text-white mx-auto my-2 px-4 py-2 rounded w-full'
-        >
-          MASUK
-        </button>
-
-        <div v-if="$nuxt.isRuleBaseEmpty">Email harus di isi</div>
-        <div v-if="$nuxt.isDiseaseEmpty">Password harus di isi</div>
-      </form>
+        <hr class="my-2"/>
+        <Form/>
+      </div>
     </main>
+    
+    <Footer/>
 
-    <footer class="bg-slate-900 text-center text-gray-200">
-      <p>&copy; {{ new Date().getFullYear() }} — Mochamad Rafli Ramadhan</p>
-    </footer>
   </div>
 </template>
 
@@ -73,19 +62,19 @@ export default {
     }
   },
   created () {
-    // created() use to call function when page reload
+    // created() is used to call function when page reload
     if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('token');
       // check token exist or not
+      const token = localStorage.getItem('token');
       if(!token) { 
-        router.push('/login'); 
+        this.$router.push('/login');
       }
       // call authorization function
       this.authorization(token);
     }
   },
   methods: {
-    // methods used for storing functions
+    // methods used for storing the functions
     // user authorization
     async authorization(token) {
       //set axios header with type Authorization + Bearer token
@@ -94,29 +83,29 @@ export default {
       .then((response) => {
         this.user = response.data;
       })
-      .catch((err) => { 
-        this.errorGetUserData = err.message;
+      .catch((error) => { 
+        this.errorGetUserData = error.message;
       })
     },
+    // log out handler
     logoutHandler() {
       //remove token from localStorage
       localStorage.removeItem('token');
       this.$router.push('/login');
+    },
+    // auto saving screening result
+    saveHandler() {
+      // 
     }
+  },
+  watch: {
+    // 
   }
 }
 </script>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap");
-footer{
-  position:fixed;
-  bottom:0;
-  width:100%;
-}
-main{
-  padding-top:40px;
-}
 .nav{
   background-color:transparent;
   position: -webkit-sticky;

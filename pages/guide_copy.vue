@@ -5,7 +5,18 @@
       Panduan Melakukan Skrining
     </div>
 
-    <Navbar class='z-20'/>
+    <nav class='nav flex flex-row justify-center m-0 py-1 px-2 space-x-5 shadow text-white'>
+      <a href="/dashboard">
+        <p class="font-bold bg-green-500 hover:bg-green-600 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg">
+          Dashboard
+        </p>
+      </a>
+      <a href="/guide_copy">
+        <p class="font-bold bg-green-500 hover:bg-green-600 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg">
+          Panduan
+        </p>
+      </a>
+    </nav>
     
     <main class='max-w-4xl mx-auto mt-8 lg:px-8 md:px-8 sm:px-6'>
       <v-expansion-panels class="pb-5 px-6 z-10">
