@@ -16,6 +16,12 @@
           Panduan
         </p>
       </a>
+      <button 
+        class="mr-auto font-bold bg-red-500 hover:bg-red-600 focus:bg-red-700 no-underline my-0 px-3 py-2 rounded-lg"
+        @click="logoutHandler"
+      >
+        Logout
+      </button>
     </nav>
     
     <main class='max-w-4xl mx-auto mt-8 lg:px-8 md:px-8 sm:px-6'>
@@ -86,7 +92,15 @@ export default {
         Hasil skrining tersebut bisa anda gunakan untuk konsultasi dengan dokter spesialis mata untuk diagnosis lebih lanjut.`
       },
     ],
-  })
+  }),
+  methods: {
+    // log out handler
+    logoutHandler() {
+      //remove token from localStorage
+      localStorage.removeItem('token');
+      this.$router.push('/login');
+    },
+  }
 }
 </script>
 
