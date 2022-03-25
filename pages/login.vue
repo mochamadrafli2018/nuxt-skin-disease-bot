@@ -26,7 +26,7 @@
           />
         </div>
         <!-- Validation -->
-        <div v-if="emailEmpty" 
+        <div v-if="emailEmpty === true" 
           class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
         >
           Email harus di isi
@@ -42,7 +42,7 @@
           />
         </div>
         <!-- Validation -->
-        <div v-if="passwordEmpty" 
+        <div v-if="passwordEmpty === true" 
           class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
         >
           Password harus di isi
@@ -54,7 +54,7 @@
           MASUK
         </button>
         <!-- Validation -->
-        <div v-if="send"
+        <div v-if="send === true"
           class="border-2 border-green-300 bg-green-100 p-3 rounded text-black"
         >
           Tunggu sebentar...
@@ -93,7 +93,7 @@ export default {
       password:'',
       errorMessage:'',
       send:false,
-      // validation
+      // input validation
       emailEmpty:false,
       passwordEmpty:false,
       // component data
@@ -107,34 +107,32 @@ export default {
   methods: {
     // user authorization
     async login() {
-      if (!this.email) { this.emailEmpty = true; }
-      if (!this.password) { this.passwordEmpty = true; }
-      else if (this.email && this.password) {
-        this.send = true
-        // POST request using axios with error handling
-        await axios.post("http://localhost:5000/api/login",
-          ({
-            email: this.email,
-            password: this.password,
-          })
-        ).then(response => {
-          // set token on local storage
-          (localStorage.setItem('token', response.data.token));
-          this.$router.push('/dashboard');
-        }).catch(error => {
-          this.send = false;
-          this.errorMessage = error.message;
+      await axios.post("http://localhost:5000/api/login",
+        ({
+          email: this.email,
+          password: this.password,
         })
-      }
+      ).then(response => {
+        this.send = true;
+        this.errorMessage = '';
+        // set token on local storage
+        (localStorage.setItem('token', response.data.token));
+        this.$router.push('/dashboard');
+      }).catch(error => {
+        this.send = false;
+        this.errorMessage = error.message;
+      })
     }
   },
   watch: {
     // whenever data in v-model changes, this function will run
-    email(val) {
-      this.emailEmpty = false;
+    email(value) {
+      if (value !== '') {this.emailEmpty = false;}
+      if (value === '') { this.emailEmpty = true; }
     },
-    password(val) {
-      this.passwordEmpty = false;
+    password(value) {
+      if (value !== '') {this.passwordEmpty = false;}
+      if (value === '') { this.passwordEmpty = true; }
     },
   }
 }
