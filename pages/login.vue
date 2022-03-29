@@ -5,19 +5,13 @@
       Login User
     </div>
 
-    <nav class='nav flex flex-row justify-center m-0 py-1 px-0 shadow space-x-5 text-white'>
-      <a v-for="(link,index) in links" :key="index" :href="link.url">
-        <p class="font-bold bg-green-500 hover:bg-green-600 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg">
-          {{ link.text }}
-        </p>
-      </a>
-    </nav>
+    <Navbar class='z-20'/>
 
-    <main class="bg-slate-900 max-w-md mx-auto mt-8 lg:p-7 md:p-5 sm:p-5 rounded-xl text-white">
+    <main class="bg-slate-900 max-w-md mx-auto mt-8 lg:p-7 md:p-5 p-5 rounded-xl text-white">
       <form onSubmit={}>
-        <h3 class='font-bold text-3xl'>Login Pengguna</h3>
+        <h3 class='font-bold lg:text-2xl md:text-2xl text-xl'>Login Pengguna</h3>
         <p>Silahkan login dengan isi data berikut.</p>
-        <div class='flex flex-col lg:my-3 md:my-3 sm:my-2'>
+        <div class='flex flex-col lg:my-3 md:my-3 my-2'>
           <label>Email</label>
           <input
             v-model="email"
@@ -32,7 +26,7 @@
           Email harus di isi
         </div>
 
-        <div class='flex flex-col lg:my-3 md:my-3 sm:my-2'>
+        <div class='flex flex-col lg:my-3 md:my-3 my-2'>
           <label>Password</label>
           <input
             type="password"
@@ -48,7 +42,7 @@
           Password harus di isi
         </div>
 
-        <button class='bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-200 text-white mx-auto lg:my-3 md:my-3 sm:my-2 px-4 py-2 rounded w-full'
+        <button class='bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-200 text-white mx-auto lg:my-3 md:my-3 my-2 px-4 py-2 rounded w-full'
           @click='login' type='button'
         >
           MASUK
@@ -96,12 +90,6 @@ export default {
       // input validation
       emailEmpty:false,
       passwordEmpty:false,
-      // component data
-      links: [
-        {text:'Home',url:'/'},
-        {text:'Daftar',url:'/register'},
-        {text:'Masuk',url:'/login'},
-      ],
     }
   },
   methods: {

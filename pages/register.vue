@@ -1,24 +1,18 @@
 <template>
-  <div class="bg-gradient-to-b from-slate-300 to-slate-400 pb-9 quicksand">
+  <div class="lg:h-full md:h-screen h-screen bg-gradient-to-b from-slate-300 to-slate-400 pb-9 quicksand">
     
     <div class='bg-slate-900 text-center text-white w-full'>
       Registrasi User
     </div>
 
-    <nav class='nav flex flex-row justify-center m-0 py-1 px-0 shadow space-x-5 text-white'>
-      <a v-for="(link,index) in links" :key="index" :href="link.url">
-        <p class="font-bold bg-green-500 hover:bg-green-600 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg">
-          {{ link.text }}
-        </p>
-      </a>
-    </nav>
+    <Navbar class='z-20'/>
 
-    <main class="bg-slate-900 max-w-md mx-auto mt-8 lg:p-7 md:p-5 sm:p-5 rounded-xl text-white">
+    <main class="bg-slate-900 max-w-md mx-auto mt-8 lg:p-7 md:p-5 p-5 rounded-xl text-white">
       <form onSubmit={}>
-        <h3 class='font-bold text-3xl'>Registrasi Pengguna Baru</h3>
+        <h3 class='font-bold lg:text-2xl md:text-2xl text-xl'>Registrasi Pengguna Baru</h3>
         <p>Mohon isi data berikut dengan benar.</p>
 
-        <div class='flex flex-col lg:my-3 md:my-3 sm:my-2'>
+        <div class='flex flex-col lg:my-3 md:my-3 my-2'>
           <label>Nama</label>
           <input
             v-model="name"
@@ -32,7 +26,7 @@
         >Nama harus di isi
         </div>
 
-        <div class='flex flex-col lg:my-3 md:my-3 sm:my-2'>
+        <div class='flex flex-col lg:my-3 md:my-3 my-2'>
           <label>Email</label>
           <input
             v-model="email"
@@ -46,7 +40,7 @@
         >Email harus di isi
         </div>
 
-        <div class='flex flex-col lg:my-3 md:my-3 sm:my-2'>
+        <div class='flex flex-col lg:my-3 md:my-3 my-2'>
           <label>Password</label>
           <input
             type="password"
@@ -65,7 +59,7 @@
         >Password terlalu pendek (minimal 8 karakter)
         </div>
 
-        <div class='flex flex-col lg:my-3 md:my-3 sm:my-2'>
+        <div class='flex flex-col lg:my-3 md:my-3 my-2'>
           <label>Konfirmasi password</label>
           <input
             type="password"
@@ -85,7 +79,7 @@
         >Password tidak sama
         </div>
 
-        <div class='flex flex-col lg:my-3 md:my-3 sm:my-2'>
+        <div class='flex flex-col lg:my-3 md:my-3 my-2'>
           <label>Jenis kelamin</label>
           <select
             v-model="gender"
@@ -96,7 +90,7 @@
           </select>
         </div>
 
-        <div class='flex flex-col lg:my-3 md:my-3 sm:my-2'>
+        <div class='flex flex-col lg:my-3 md:my-3 my-2'>
           <label>
           <input 
             type="checkbox"
@@ -111,7 +105,7 @@
         >Klik pernyataan di atas
         </div>
         
-        <button class='bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-200 text-white mx-auto lg:my-3 md:my-3 sm:my-2 px-4 py-2 rounded w-full'
+        <button class='bg-green-500 hover:bg-green-600 focus:ring focus:ring-green-200 text-white mx-auto lg:my-3 md:my-3 my-2 px-4 py-2 rounded w-full'
           @click='register' 
           type='button'
         >
@@ -162,12 +156,6 @@ export default {
       passwordConfirmationEmpty: false,
       passwordConfirmationMatch: true,
       isChecked: true,
-      // component data
-      links: [
-        {text:'Home',url:'/'},
-        {text:'Daftar',url:'/register'},
-        {text:'Masuk',url:'/login'},
-      ],
     }
   },
   methods: {

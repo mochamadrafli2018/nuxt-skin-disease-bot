@@ -7,7 +7,7 @@
 
     <Navbar class='z-20'/>
     
-    <main class='max-w-4xl mx-auto mt-8 lg:px-8 md:px-8 sm:px-6'>
+    <main class='max-w-4xl mx-auto lg:mt-8 md:mt-5 mt-3 lg:px-8 md:px-6 px-4'>
       <v-expansion-panels class="pb-5 px-6 z-10">
         <v-expansion-panel v-for="(item,index) in guides" :key="index" 
         class='my-1 rounded'>

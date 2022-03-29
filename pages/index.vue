@@ -8,7 +8,7 @@
     <Navbar/>
 
     <main class="max-w-4xl mx-auto mt-8 px-2">
-      <p class="font-semibold text-black my-2 lg:text-3xl md:lg:text-3xl sm:text-2xl text-center leading-7">
+      <p class="font-semibold text-black my-2 lg:text-3xl md:lg:text-3xl text-2xl text-center leading-7">
         Web App Skrining Penyakit Mata berbasis Form
       </p>
       <!-- Form -->

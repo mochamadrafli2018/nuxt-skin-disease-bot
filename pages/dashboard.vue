@@ -5,29 +5,10 @@
       Halo, <span class='font-bold underline'>{{ user.name }}</span>
     </div>
 
-    <nav class='nav flex flex-row m-0 py-1 px-2 shadow text-white'>
-      <div class='flex flex-row justify-center space-x-5'>
-        <a href="/dashboard">
-          <p class="font-bold bg-green-500 hover:bg-green-600 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg">
-            Dashboard
-          </p>
-        </a>
-        <a href="/guide_copy">
-          <p class="font-bold bg-green-500 hover:bg-green-600 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg">
-            Panduan
-          </p>
-        </a>
-      </div>
-      <button 
-        class="mr-auto font-bold bg-red-500 hover:bg-red-600 focus:bg-red-700 no-underline my-0 px-3 py-2 rounded-lg"
-        @click="logoutHandler"
-      >
-        Logout
-      </button>
-    </nav>
-
+    <Navbar class='z-20'/>
+    
     <main class="max-w-4xl mx-auto mt-8 px-2">
-      <p class="font-semibold text-black my-2 lg:text-3xl md:lg:text-3xl sm:text-2xl text-center leading-7">
+      <p class="font-semibold text-black my-2 lg:text-3xl md:lg:text-3xl text-2xl text-center leading-7">
         Web App Skrining Penyakit Mata berbasis Form
       </p>
       <!-- Form -->
@@ -86,12 +67,6 @@ export default {
       .catch((error) => { 
         this.errorGetUserData = error.message;
       })
-    },
-    // log out handler
-    logoutHandler() {
-      //remove token from localStorage
-      localStorage.removeItem('token');
-      this.$router.push('/login');
     },
     // auto saving screening result
     saveHandler() {
