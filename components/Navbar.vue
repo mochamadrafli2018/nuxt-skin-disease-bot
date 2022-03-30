@@ -23,7 +23,7 @@
       </a>
       <a href="/login" v-if="tokenEmpty === true">
         <p class="font-bold bg-green-500 hover:bg-green-600 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg">
-          Login
+          Masuk
         </p>
       </a>
       <button
@@ -31,7 +31,7 @@
         class="mr-auto font-bold bg-red-500 hover:bg-red-600 focus:bg-red-700 no-underline my-0 px-3 py-2 rounded-lg"
         @click="logoutHandler"
       >
-        Logout
+        Keluar
       </button>
     </nav>
 
