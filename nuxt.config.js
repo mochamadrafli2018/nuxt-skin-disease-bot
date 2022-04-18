@@ -12,7 +12,8 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: 'https://clipground.com/images/programming-logo-clipart-5.jpg' },
+      { rel: 'apple-touch-icon', type: 'image/x-icon', href: 'https://clipground.com/images/programming-logo-clipart-5.jpg' }
     ]
   },
 
