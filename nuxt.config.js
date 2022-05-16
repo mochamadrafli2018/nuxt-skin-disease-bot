@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Eye-Screening : Chatbot',
+    title: 'Skin-Diseases : Chatbot',
     htmlAttrs: {
       lang: 'en'
     },

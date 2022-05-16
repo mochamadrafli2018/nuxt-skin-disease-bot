@@ -1,4 +1,4 @@
-export default function AddChatWhenBrowserReload(text) {
+export default function BotChat(text) {
       const messagesContainer = document.getElementById('messages')
       // create div element for bot reply
       const botDiv = document.createElement('div')
@@ -15,8 +15,8 @@ export default function AddChatWhenBrowserReload(text) {
       botDiv.appendChild(botText)
       // add botDiv to messagesContainer
       messagesContainer.appendChild(botDiv)
-      // Fake delay to seem 'real'
+      // fake delay to seem 'real'
       setTimeout(() => {
         botText.innerHTML = `${text}`
-      },500)
+      },300) 
 }
