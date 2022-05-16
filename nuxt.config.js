@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Eye-Screening : Form',
+    title: 'Eye-Screening : Chatbot',
     htmlAttrs: {
       lang: 'en'
     },
@@ -21,6 +21,7 @@ export default {
   css: [
     // tailwind css
     '@/assets/css/main.css',
+    'bootstrap-icons/font/bootstrap-icons.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

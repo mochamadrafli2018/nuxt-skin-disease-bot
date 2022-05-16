@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gradient-to-b from-slate-300 to-slate-400 quicksand">
   
-    <div class='bg-slate-900 text-center text-white w-full'>
+    <div class='bg-green-900 text-center text-white w-full'>
       Halo, <span class='font-bold underline'>{{ user.name }}</span>
     </div>
 
@@ -12,7 +12,7 @@
         Web App Skrining Penyakit Mata berbasis Form
       </p>
       <!-- Form -->
-      <div class="bg-slate-900 mt-5 px-6 pb-3 overflow-hidden rounded-lg">
+      <div class="bg-green-900 mt-5 px-6 pb-3 overflow-hidden rounded-lg">
         <p class="my-2 text-xl text-center text-white">
           Pilih Beberapa Gejala Penyakit Mata di Bawah ini
         </p>

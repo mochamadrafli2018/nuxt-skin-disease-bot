@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen bg-gradient-to-b from-slate-300 to-slate-400 pb-5 quicksand">
     
-    <div class='bg-slate-900 text-center text-white w-full'>
+    <div class='bg-green-900 text-center text-white w-full'>
       Panduan Melakukan Skrining
     </div>
 
@@ -11,7 +11,7 @@
       <v-expansion-panels class="pb-5 px-6 z-10">
         <v-expansion-panel v-for="(item,index) in guides" :key="index" 
         class='my-1 rounded'>
-          <v-expansion-panel-header class='bg-slate-900'>
+          <v-expansion-panel-header class='bg-green-900'>
             <p class='font-bold text-left text-lg text-white underline'>
               {{ item.title }}
             </p>
@@ -23,7 +23,7 @@
       </v-expansion-panels>
     </main>
     
-    <footer class="bg-slate-900 text-center text-gray-200 z-20">
+    <footer class="bg-green-900 text-center text-gray-200 z-20">
       <p>&copy; {{ new Date().getFullYear() }} — Mochamad Rafli Ramadhan</p>
     </footer>
   </div>

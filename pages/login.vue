@@ -1,13 +1,13 @@
 <template>
   <div class="h-screen bg-gradient-to-b from-slate-300 to-slate-400 pb-5 quicksand">
     
-    <div class='bg-slate-900 text-center text-white w-full'>
+    <div class='bg-green-900 text-center text-white w-full'>
       Login User
     </div>
 
     <Navbar class='z-20'/>
 
-    <main class="bg-slate-900 max-w-md mx-auto mt-8 lg:p-7 md:p-5 p-5 rounded-xl text-white">
+    <main class="bg-green-900 max-w-md mx-auto mt-8 lg:p-7 md:p-5 p-5 rounded-xl text-white">
       <form onSubmit={}>
         <h3 class='font-bold lg:text-2xl md:text-2xl text-xl'>Login Pengguna</h3>
         <p>Silahkan login dengan isi data berikut.</p>
