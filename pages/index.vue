@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-gradient-to-b from-green-50 to-green-200 h-screen quicksand">    
-    <div class='bg-green-900 text-center text-white w-full'>
+  <div class="bg-gradient-to-b from-green-50 to-green-200 h-screen quicksand">
+    <div class='bg-green-800 text-center text-white w-full'>
       Skin Disease Screening Chatbot
     </div>
     <Navbar/>

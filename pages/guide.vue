@@ -1,7 +1,7 @@
 <template>
-  <div class="h-screen bg-gradient-to-b from-slate-300 to-slate-400 pb-5 quicksand">
+  <div class="h-screen bg-gradient-to-b from-green-50 to-green-200 pb-5 quicksand">
     
-    <div class='bg-green-900 text-center text-white w-full'>
+    <div class='bg-green-800 text-center text-white w-full'>
       Panduan Melakukan Skrining
     </div>
 
@@ -16,7 +16,7 @@
               {{ item.title }}
             </p>
           </v-expansion-panel-header>
-          <v-expansion-panel-content class='bg-slate-700 py-2 text-white'>
+          <v-expansion-panel-content class='bg-green-700 py-2 text-white'>
             <p>{{ item.text }}</p>
           </v-expansion-panel-content>
         </v-expansion-panel>

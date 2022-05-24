@@ -1,7 +1,7 @@
 <template>
-  <div class="lg:h-full md:h-screen h-screen bg-gradient-to-b from-slate-300 to-slate-400 pb-9 quicksand">
+  <div class="lg:h-full md:h-screen h-screen bg-gradient-to-b from-green-50 to-green-200 pb-9 quicksand">
     
-    <div class='bg-green-900 text-center text-white w-full'>
+    <div class='bg-green-800 text-center text-white w-full'>
       Registrasi User
     </div>
 

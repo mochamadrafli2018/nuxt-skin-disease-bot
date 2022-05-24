@@ -1,7 +1,7 @@
 <template>
-  <div class="h-screen bg-gradient-to-b from-slate-300 to-slate-400 pb-5 quicksand">
+  <div class="h-screen bg-gradient-to-b from-green-50 to-green-200 pb-5 quicksand">
     
-    <div class='bg-green-900 text-center text-white w-full'>
+    <div class='bg-green-800 text-center text-white w-full'>
       Login User
     </div>
 

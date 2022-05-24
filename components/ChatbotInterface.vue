@@ -4,12 +4,24 @@
       <h4 class='bg-green-700 mb-0 p-1 w-100 opensans rounded-top text-center text-white text-xl'>
         Chat Bot Sistem Pakar
       </h4>
-      <div 
-        id='messages'
-        ref='messagesScroll'
-        class='bg-chat h-96 max-h-96 mx-0 px-2 py-1 w-100 overflow-y-scroll'
+      <div
+        id='chatContainer'
+        class='border-2 border-black bg-chat h-96 max-h-96 mx-0 px-2 py-1 w-100 overflow-y-scroll'
+        ref='chatContainer'
       >
-        <!--*Chat will be append in here-->
+        <span
+          v-for="(item, index) in messageLog" :key=index
+        >
+          <!-- bot chat -->
+          <i v-if="item.sender === 'bot'" class='inline-block bi bi-robot bg-slate-100 border-2 border-green-700 px-2 py-1 rounded-full text-dark text-xl'></i>
+          <p v-if="item.sender === 'bot'" class='inline-block bg-slate-100 border-2 border-green-700 ml-1 px-2 py-1 rounded-r-3xl rounded-tl-2xl text-dark w-4/5'>
+            {{item.message}}
+          </p>
+          <!-- user chat -->
+          <p v-if="item.sender === 'user'" class='bg-green-600 border-2 border-white my-1 ml-auto px-3 py-2 max-w-7xl rounded-l-3xl rounded-br-2xl text-white w-min'>
+            {{item.message}}
+          </p>
+        </span>
       </div>
       <div class='flex p-2 w-100'>
         <input
@@ -35,23 +47,15 @@
         type='submit' 
         value='Submit' 
         @click='handleStartScreening'
-        class='bg-green-700 hover:bg-green-800 mx-1 px-2 py-2 rounded-full text-white w-1/4'
+        class='bg-green-700 hover:bg-green-800 mx-1 px-2 py-2 rounded-full text-white w-1/3'
       >
         <p class='text-white'>Skrining</p>
       </button>
       <button 
         type='submit' 
         value='Submit' 
-        @click='handleNextScreening'
-        class='bg-green-700 hover:bg-green-800 mx-1 px-2 py-2 rounded-full text-white w-1/4'
-      >
-        <p class='text-white'>Lanjut</p>
-      </button>
-      <button 
-        type='submit' 
-        value='Submit' 
         @click='handleYes'
-        class='bg-green-700 hover:bg-green-800 mx-1 px-2 py-2 rounded-full text-white w-1/4'
+        class='bg-green-700 hover:bg-green-800 mx-1 px-2 py-2 rounded-full text-white w-1/3'
       >
         <p class='text-white'>Ya</p>
       </button>
@@ -59,7 +63,7 @@
         type='submit'
         value='Submit'
         @click='handleNo'
-        class='bg-green-700 hover:bg-green-800 mx-1 px-2 py-2 rounded-full text-white w-1/4'
+        class='bg-green-700 hover:bg-green-800 mx-1 px-2 py-2 rounded-full text-white w-1/3'
       >
         <p class='text-white'>Tidak</p>
       </button>
@@ -83,8 +87,6 @@
 
 <script>
 import axios from 'axios';
-import BotChat from './BotChat.js';
-import UserChat from './UserChat.js';
 import Compare from './Compare.js';
 import {prompts,replies,alternative,coronavirus} from '../data/PromptsAndReplies.js';
 import sympthom from '../data/SympthomList.js'
@@ -118,29 +120,43 @@ export default {
       [sympthom[1],sympthom[5],sympthom[10],'Tumor, Strabismus atau Ophthalmopathy Thyroid'],
       [sympthom[1],sympthom[5],'Sikatrik Kornea, Kelainan Refraksi, Katarak, Uveitis Posterior, Glaukoma Sudut Terbuka Primer, Retinopati Diabetika & Hipertensi, Penyakit Macula, Papil Udema, Amblyopia, Neuropati Optik atau Retinisi Pigmentosa'],
       ['end of first screening']
-    ]
+    ],
+    messageLog:[
+      {
+        sender:'bot',
+        message:`Halo, ini adalah bot skrining penyakit kulit, Untuk memulai skrining penyakit kulit ketikan atau tekan tombol mulai`
+      }
+    ],
+    chatContainer: null,
   }),
-  created() {
-    this.autoScrollToBottom();
-    this.openingChat();
+  watch: {
+    // Whenever messageLog in data changes, this function will run.
+    messageLog() {
+      this.scrollToEnd();
+      /* if (chatContainer) {
+        chatContainer.current.addEventListener('DOMNodeInserted', event => {
+          const { currentTarget: target } = event;
+          target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+        });
+      }*/
+    },
   },
   methods: {
-    autoScrollToBottom() {
-      //const el = this.$refs.scrollToMe;
-      //if (el) {
-        //el.scrollIntoView({ behavior: "smooth" });
-      //}
-      // create a ref 
-      const el = this.$refs.messagesScroll;
-      if (el) {
-        this.$ref.messagesScroll.scrollIntoView({ behavior: "smooth" })
-      }
-    },
-    openingChat() {
-      // opening chat message will be appear when browser reload
-      setTimeout(() => {
-        BotChat(`Halo, ini adalah bot skrining penyakit kulit, Untuk memulai skrining penyakit mata ketikan atau tekan tombol <strong>mulai</strong>.`);
-      },1000)
+    // Auto scrolls the chat log to the bottom when a new message is received
+    scrollToEnd: function() {
+      const container = this.$refs.chatContainer;
+      /*
+      scrollHeight: total container size.
+      scrollTop: amount of scroll user has done.
+      clientHeight: amount of container a user sees.
+      */
+      container.current.scrollIntoView({ behavior: 'smooth' })
+      // const container = this.$container.getElementsById('#chatContainer')[0];
+      // const container = this.$container.querySelector("#chatContainer");
+      // container.scrollTop = container.scrollHeight; // worked
+      // container.scrollTo(0, container.scrollHeight); //worked
+      // container.scrollIntoView({behavior: 'smooth'}); // not working
+      // container.scroll({ top: target.scrollHeight, behavior: 'smooth' }); // not worked
     },
     // get bot reply after user input chat and button was clicked
     handleSubmit() {
@@ -158,12 +174,6 @@ export default {
       this.Output('skrining') // input = 'mulai'
       this.chatInput='' // return empty form after user press button
     },
-    handleNextScreening() {
-      this.Output('lanjut') // input = 'lanjut'
-      this.chatInput='' // return empty form after user press the button
-      this.inputNow='lanjut'
-      this.inputBefore=this.inputNow
-    },
     handleYes() {
       this.Output('ya') // input = 'ya'
       this.chatInput='' // return empty form after user press button
@@ -177,7 +187,11 @@ export default {
       this.inputNow='tidak'
     },
     Output(input) {
-      input = input.toLowerCase()
+      // Add user chat
+      this.messageLog = [...this.messageLog, {sender:'user', message:input}]
+
+      input = input
+        .toLowerCase()
         .replace(/[^\w\s]/gi, '') // replace unneccessary input from user
         .replace(/[\d]/gi, '')
         .replace(/ a /g, ' ')     // example : 'tell me a story' -> 'tell me story'
@@ -189,32 +203,29 @@ export default {
         .replace(/'/g, '')
         .trim(); // remove whitespace from both sides of a string
 
-      // Add user chat
-      UserChat(input);
-
       let reply;
       if (Compare(prompts, replies, input)) {
         reply = Compare(prompts, replies, input);
-        BotChat(reply);
+        this.messageLog = [...this.messageLog, {sender:'bot', message:reply}]
       } 
       else if (input.match(/terima kasih/gi)) {
         reply = 'Sama-sama'
-        BotChat(reply);
+        this.messageLog = [...this.messageLog, {sender:'bot', message:reply}]
       }
       // Check if input contains `coronavirus`
       else if (input.match(/(corona|covid|virus)/gi)) {
         reply = coronavirus[Math.floor(Math.random() * coronavirus.length)];
-        BotChat(reply);
+        this.messageLog = [...this.messageLog, {sender:'bot', message:reply}]
       }
       // Screening algorithm
-      else if (input.match(/(y|ya|t|tidak|mulai|tes|test|skrining|lanjut)/gi)) {
+      else if (input.match(/(y|ya|t|tidak|mulai|tes|test|skrining)/gi)) {
         reply = this.Screening(input)[0];
-        BotChat(reply);
+        this.messageLog = [...this.messageLog, {sender:'bot', message:reply}]
       }
       // If all else fails: random alternative
       else {
         reply = alternative[Math.floor(Math.random() * alternative.length)];
-        BotChat(reply);
+        this.messageLog = [...this.messageLog, {sender:'bot', message:reply}]
       }
     },
     // auto update screening result when screening result come up
@@ -249,14 +260,13 @@ export default {
       else {
         // screening result is not '', return screening result.
         if (this.screeningResult !== '') {
-          reply = 'Ingin melakukan skrining lagi? tekan atau ketik mulai.'
+          reply = 'Ingin melakukan skrining lagi? tekan tombol mulai atau ketik mulai.'
         }
         // screening result is ''
         else if (this.screeningResult === '') {
           if (
             this.replyBefore === 'mulai' || this.replyBefore === 'tes' || 
-            this.replyBefore === 'test' || this.replyBefore === 'skrining' ||
-            this.replyBefore === 'lanjut'
+            this.replyBefore === 'test' || this.replyBefore === 'skrining'
           ) {
             // the current value is this.ruleBase[this.i][this.j]
             if (input === 'y' || input === 'ya') {
@@ -276,7 +286,7 @@ export default {
               // if this.ruleBase[this.i][this.j+1] is the last value in [this.i] array
               else if (this.ruleBase[this.i][this.j+1] === this.ruleBase[this.i][this.ruleBase[this.i].length - 1]) {
                 if (this.inputNow === 'tidak') {
-                  reply = `Melalui skrining dicurigai kamu mengalami <strong>${this.totalSympthomWhenUserResponYes[this.totalSympthomWhenUserResponYes.length-1]} gejala</strong> dari penyakit mata <strong>${this.lastValueWhenUserResponYes}</strong>. 
+                  reply = `Melalui skrining dicurigai kamu mengalami ${this.totalSympthomWhenUserResponYes[this.totalSympthomWhenUserResponYes.length-1]} gejala dari penyakit kulit ${this.lastValueWhenUserResponYes}. 
                   Silahkan konsultasikan hasil skrining ini dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                   this.screeningResult=reply;
                   this.ruleBaseBefore=this.ruleBase[this.i][this.j+1];
@@ -289,7 +299,7 @@ export default {
                 }
                 if (this.inputNow === 'ya') {
                   this.check='else ya'
-                  reply = `Melalui skrining dicurigai kamu mengalami <strong>${this.totalSympthomWhenUserResponYes[this.totalSympthomWhenUserResponYes.length-1]} gejala</strong> dari penyakit mata <strong>${this.lastValueWhenUserResponYes}</strong>. 
+                  reply = `Melalui skrining dicurigai kamu mengalami ${this.totalSympthomWhenUserResponYes[this.totalSympthomWhenUserResponYes.length-1]} gejala dari penyakit kulit ${this.lastValueWhenUserResponYes}. 
                   Silahkan konsultasikan hasil skrining ini dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                   this.screeningResult=reply;
                   this.ruleBaseBefore=this.ruleBase[this.i][this.j+1];
@@ -314,14 +324,14 @@ export default {
                   let findIndexInArray = arr.indexOf(this.ruleBase[this.i][this.j])
                   // last value in this.ruleBase[this.i], case for only g[58] (works)
                   if (arr[findIndexInArray+1] === undefined) {
-                    reply = `Apa kamu yakin tidak mengalami gejala penyakit mata yang ditanyakan oleh bot? 
+                    reply = `Apa kamu yakin tidak mengalami gejala penyakit kulit yang ditanyakan oleh bot? 
                     Silahkan ulangi skrining dengan tekan atau ketik mulai.`;
                     this.screeningResult=reply;
                   }
                   if (arr[findIndexInArray+1] !== undefined) {
                     // if user's eyes are not red (normal) and eye vision is normal
                     if (arr[findIndexInArray+1] === 'end of first screening') {
-                      reply = `Apa kamu yakin tidak mengalami gejala <b>mata merah</b> atau <b>penglihatan menurun?</b> 
+                      reply = `Apa kamu yakin tidak mengalami gejala mata merah atau penglihatan menurun?
                       Silahkan ulangi skrining dengan tekan atau ketik mulai.`;
                       this.screeningResult=reply;
                     }
@@ -359,12 +369,12 @@ export default {
                     if (arr[findIndexInArray+1] !== undefined) {
                       // if this.ruleBase[this.i+1][this.j] is the last value of this.ruleBase[this.i]
                       if (arr[findIndexInArray+1] === this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]) {
-                        reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                        Melalui skrining dicurigai kamu mengalami <strong>${this.allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]}</strong>. 
+                        reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                        Melalui skrining dicurigai kamu mengalami ${this.allYesReply.length} gejala dari penyakit kulit antara ${this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]}. 
                         Silahkan konsultasikan hasil skrining ini dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                         this.screeningResult=reply; 
                         this.replyBefore=''; 
-                        this.ruleBaseBefore=ruleBase[i+1][j];
+                        this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                         // set screening result on local storage
                         localStorage.setItem('screening_result', reply);
                         if(localStorage.getItem('token')) {
@@ -387,23 +397,23 @@ export default {
                       }
                     }
                     if (arr[findIndexInArray+1] === undefined) {
-                      reply = `Kamu hanya menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                      Belum bisa dipastikan penyakit mata yang tepat hanya dari 1 gejala tersebut. 
+                      reply = `Kamu hanya menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                      Belum bisa dipastikan penyakit kulit yang tepat hanya dari 1 gejala tersebut. 
                       Silahkan konsultasikan hasil skrining ini dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                       this.screeningResult=reply; 
                       this.replyBefore=''; 
-                      this.ruleBaseBefore=ruleBase[i+1][j];
+                      this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                     }
                   }
                   // if this.ruleBase[this.i+1][this.j-1] === undefined ||
                   // this.ruleBase[this.i][this.j-1] !== this.ruleBase[this.i+1][this.j-1]
                   else {
-                    reply = `Kamu hanya menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                    Belum bisa dipastikan penyakit mata yang tepat hanya dari 1 gejala tersebut. 
+                    reply = `Kamu hanya menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                    Belum bisa dipastikan penyakit kulit yang tepat hanya dari 1 gejala tersebut. 
                     Silahkan konsultasikan hasil skrining ini dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                     this.screeningResult=reply; 
                     this.replyBefore=''; 
-                    this.ruleBaseBefore=ruleBase[i+1][j];
+                    this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                   }
                 }
                 else if (this.j === 2) { 
@@ -428,12 +438,12 @@ export default {
                     if (arr[findIndexInArray+1] !== undefined) {
                       // if this.ruleBase[this.i+1][this.j] is the last value of this.ruleBase[this.i]
                       if (arr[findIndexInArray+1] === this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]) {
-                        reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                        Melalui skrining dicurigai kamu mengalami <strong>${this.allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]}</strong>. 
+                        reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                        Melalui skrining dicurigai kamu mengalami ${this.allYesReply.length} gejala dari penyakit kulit antara ${this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]}. 
                         Silahkan konsultasikan hasil skrining ini dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                         this.screeningResult=reply; 
                         this.replyBefore=''; 
-                        this.ruleBaseBefore=ruleBase[i+1][j];
+                        this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                         // set screening result on local storage
                         localStorage.setItem('screening_result', reply);
                         if(localStorage.getItem('token')) {
@@ -456,23 +466,23 @@ export default {
                       }
                     }
                     if (arr[findIndexInArray+1] === undefined) {
-                      reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                      Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
+                      reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                      Belum bisa ditentukan hasil skrining penyakit kulit dengan gejala-gejala yang kamu jawab ya. 
                       Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                       this.screeningResult=reply; 
                       this.replyBefore=''; 
-                      this.ruleBaseBefore=ruleBase[i+1][j];
+                      this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                     }
                   }
                   // if this.ruleBase[this.i+1][this.j-1] === undefined ||
                   // this.ruleBase[this.i+1][this.j-2] === undefined
                   else {
-                    reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                    Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
+                    reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                    Belum bisa ditentukan hasil skrining penyakit kulit dengan gejala-gejala yang kamu jawab ya. 
                     Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                     this.screeningResult=reply; 
                     this.replyBefore=''; 
-                    this.ruleBaseBefore=ruleBase[i+1][j];
+                    this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                   }
                 }
                 else if (this.j === 3) {
@@ -498,12 +508,12 @@ export default {
                     if (arr[findIndexInArray+1] !== undefined) {
                       // if this.ruleBase[this.i+1][this.j] is the last value of this.ruleBase[this.i]
                       if (arr[findIndexInArray+1] === this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]) {
-                        reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                        Melalui skrining dicurigai kamu mengalami <strong>${this.allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]}</strong>. 
+                        reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                        Melalui skrining dicurigai kamu mengalami ${this.allYesReply.length} gejala dari penyakit kulit antara ${this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]}. 
                         Silahkan konsultasikan hasil skrining ini dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                         this.screeningResult=reply; 
                         this.replyBefore=''; 
-                        this.ruleBaseBefore=ruleBase[i+1][j];
+                        this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                         // set screening result on local storage
                         localStorage.setItem('screening_result', reply);
                         if(localStorage.getItem('token')) {
@@ -526,24 +536,24 @@ export default {
                       }
                     }
                     if (arr[findIndexInArray+1] === undefined) {
-                      reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                      Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
+                      reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                      Belum bisa ditentukan hasil skrining penyakit kulit dengan gejala-gejala yang kamu jawab ya. 
                       Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                       this.screeningResult=reply; 
                       this.replyBefore=''; 
-                      this.ruleBaseBefore=ruleBase[i+1][j];
+                      this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                     } 
                   }
                   // if this.ruleBase[this.i+1][this.j-1] === undefined || 
                   // this.ruleBase[this.i+1][this.j-2] === undefined ||
                   // this.ruleBase[this.i+1][this.j-3] === undefined ||
                   else {
-                    reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                    Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
+                    reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                    Belum bisa ditentukan hasil skrining penyakit kulit dengan gejala-gejala yang kamu jawab ya. 
                     Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                     this.screeningResult=reply; 
                     this.replyBefore=''; 
-                    this.ruleBaseBefore=ruleBase[i+1][j];
+                    this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                   }
                 }
                 else if (this.j === 4) {
@@ -571,12 +581,12 @@ export default {
                     if (arr[findIndexInArray+1] !== undefined) {
                       // if this.ruleBase[this.i+1][this.j] is the last value of this.ruleBase[this.i]
                       if (arr[findIndexInArray+1] === this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]) {
-                        reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                        Melalui skrining dicurigai kamu mengalami <strong>${this.allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]}</strong>. 
+                        reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                        Melalui skrining dicurigai kamu mengalami ${this.allYesReply.length} gejala dari penyakit kulit antara ${this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]}. 
                         Silahkan konsultasikan hasil skrining ini dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                         this.screeningResult=reply; 
                         this.replyBefore=''; 
-                        this.ruleBaseBefore=ruleBase[i+1][j];
+                        this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                         // set screening result on local storage
                         localStorage.setItem('screening_result', reply);
                         if(localStorage.getItem('token')) {
@@ -599,12 +609,12 @@ export default {
                       }
                     }
                     if (arr[findIndexInArray+1] === undefined) {
-                      reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                      Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
+                      reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                      Belum bisa ditentukan hasil skrining penyakit kulit dengan gejala-gejala yang kamu jawab ya. 
                       Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                       this.screeningResult=reply; 
                       this.replyBefore=''; 
-                      this.ruleBaseBefore=ruleBase[i+1][j];
+                      this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                     }
                   }
                   // if this.ruleBase[this.i+1][this.j-1] === undefined || 
@@ -612,12 +622,12 @@ export default {
                   // this.ruleBase[this.i+1][this.j-3] === undefined ||
                   // this.ruleBase[this.i+1][this.j-4] === undefined ||
                   else {
-                    reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                    Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
+                    reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                    Belum bisa ditentukan hasil skrining penyakit kulit dengan gejala-gejala yang kamu jawab ya. 
                     Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                     this.screeningResult=reply; 
                     this.replyBefore=''; 
-                    this.ruleBaseBefore=ruleBase[i+1][j];
+                    this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                   }
                 }
                 else if (this.j === 5) {
@@ -647,12 +657,12 @@ export default {
                     if (arr[findIndexInArray+1] !== undefined) {
                       // if this.ruleBase[this.i+1][this.j] is the last value of this.ruleBase[this.i]
                       if (arr[findIndexInArray+1] === this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]) {
-                        reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                        Melalui skrining dicurigai kamu mengalami <strong>${this.allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]}</strong>. 
+                        reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                        Melalui skrining dicurigai kamu mengalami ${this.allYesReply.length} gejala dari penyakit kulit antara ${this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]}. 
                         Silahkan konsultasikan hasil skrining ini dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                         this.screeningResult=reply; 
                         this.replyBefore=''; 
-                        this.ruleBaseBefore=ruleBase[i+1][j];
+                        this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                         // set screening result on local storage
                         localStorage.setItem('screening_result', reply);
                         if(localStorage.getItem('token')) {
@@ -675,12 +685,12 @@ export default {
                       }
                     }
                     if (arr[findIndexInArray+1] === undefined) {
-                      reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                      Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
+                      reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                      Belum bisa ditentukan hasil skrining penyakit kulit dengan gejala-gejala yang kamu jawab ya. 
                       Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                       this.screeningResult=reply; 
                       this.replyBefore=''; 
-                      this.ruleBaseBefore=ruleBase[i+1][j];
+                      this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                     }
                   }
                   // if this.ruleBase[this.i+1][this.j-1] === undefined || 
@@ -689,12 +699,12 @@ export default {
                   // this.ruleBase[this.i+1][this.j-4] === undefined ||
                   // this.ruleBase[this.i+1][this.j-5] === undefined ||
                   else {
-                    reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                    Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
+                    reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                    Belum bisa ditentukan hasil skrining penyakit kulit dengan gejala-gejala yang kamu jawab ya. 
                     Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                     this.screeningResult=reply; 
                     this.replyBefore=''; 
-                    this.ruleBaseBefore=ruleBase[i+1][j];
+                    this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                   }
                 }
                 else if (this.j === 6) {
@@ -726,12 +736,12 @@ export default {
                     if (arr[findIndexInArray+1] !== undefined) {
                       // if this.ruleBase[this.i+1][this.j] is the last value of this.ruleBase[this.i]
                       if (arr[findIndexInArray+1] === this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]) {
-                        reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                        Melalui skrining dicurigai kamu mengalami <strong>${this.allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]}</strong>. 
+                        reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                        Melalui skrining dicurigai kamu mengalami ${this.allYesReply.length} gejala dari penyakit kulit antara ${this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]}. 
                         Silahkan konsultasikan hasil skrining ini dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                         this.screeningResult=reply; 
                         this.replyBefore=''; 
-                        this.ruleBaseBefore=ruleBase[i+1][j];
+                        this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                         // set screening result on local storage
                         localStorage.setItem('screening_result', reply);
                         if(localStorage.getItem('token')) {
@@ -754,12 +764,12 @@ export default {
                       }
                     }
                     if (arr[findIndexInArray+1] === undefined) {
-                      reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                      Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
+                      reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                      Belum bisa ditentukan hasil skrining penyakit kulit dengan gejala-gejala yang kamu jawab ya. 
                       Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                       this.screeningResult=reply; 
                       this.replyBefore=''; 
-                      this.ruleBaseBefore=ruleBase[i+1][j];
+                      this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                     }
                   }
                   // if this.ruleBase[this.i+1][this.j-1] === undefined || 
@@ -769,12 +779,12 @@ export default {
                   // this.ruleBase[this.i+1][this.j-5] === undefined ||
                   // this.ruleBase[this.i+1][this.j-6] === undefined ||
                   else {
-                    reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                    Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
+                    reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                    Belum bisa ditentukan hasil skrining penyakit kulit dengan gejala-gejala yang kamu jawab ya. 
                     Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                     this.screeningResult=reply; 
                     this.replyBefore=''; 
-                    this.ruleBaseBefore=ruleBase[i+1][j];
+                    this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                   }
                 }
                 // for j > 6 
@@ -793,12 +803,12 @@ export default {
                   if (arr[findIndexInArray+1] !== undefined) {
                     // if this.ruleBase[this.i+1][this.j] is the last value of this.ruleBase[this.i]
                     if (arr[findIndexInArray+1] === this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]) {
-                      reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                      Melalui skrining dicurigai kamu mengalami <strong>${this.allYesReply.length} gejala</strong> dari penyakit mata antara <strong>${this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]}</strong>. 
+                      reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                      Melalui skrining dicurigai kamu mengalami ${this.allYesReply.length} gejala dari penyakit kulit antara ${this.ruleBase[this.i+1][this.ruleBase[this.i+1].length-1]}. 
                       Silahkan konsultasikan hasil skrining ini dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                       this.screeningResult=reply; 
                       this.replyBefore=''; 
-                      this.ruleBaseBefore=ruleBase[i+1][j];
+                      this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                       // set screening result on local storage
                       localStorage.setItem('screening_result', reply);
                       if(localStorage.getItem('token')) {
@@ -822,21 +832,21 @@ export default {
                   }
                   // for i === this.ruleBase.length
                   if (arr[findIndexInArray+1] === undefined) {
-                    reply = `Kamu menjawab <strong>ya</strong> untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
-                    Belum bisa ditentukan hasil skrining penyakit mata dengan gejala-gejala yang kamu jawab <strong>ya</strong>. 
+                    reply = `Kamu menjawab ya untuk ${this.allYesReply.length} pertanyaan yang ditanyakan oleh bot. 
+                    Belum bisa ditentukan hasil skrining penyakit kulit dengan gejala-gejala yang kamu jawab ya. 
                     Silahkan ulangi skrining atau konsultasikan gejala-gejala tersebut dengan dokter spesialis kulit terdekat untuk informasi lebih lanjut.`
                     this.screeningResult=reply; 
                     this.replyBefore=''; 
-                    this.ruleBaseBefore=ruleBase[i+1][j];
+                    this.ruleBaseBefore=this.ruleBase[this.i+1][this.j];
                   }
                 }
             }
           }
           // if user type or press 'y' / 't' / 'ya' / 'tidak', 
-          // but not press 'mulai' / 'tes' / 'test' / 'skrining' / 'lanjut' before
+          // but not press 'mulai' / 'tes' / 'test' / 'skrining' before
           else {
             if (input === 'y' || input === 'ya' || input === 't' || input === 'tidak') {
-              reply = `Ketik atau tekan <strong>mulai</strong> untuk skrining penyakit mata`
+              reply = `Ketik atau tekan mulai untuk skrining penyakit kulit`
             }
           }
         }
