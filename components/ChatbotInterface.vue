@@ -127,18 +127,14 @@ export default {
         message:`Halo, ini adalah bot skrining penyakit kulit, Untuk memulai skrining penyakit kulit ketikan atau tekan tombol mulai`
       }
     ],
-    chatContainer: null,
   }),
   watch: {
     // Whenever messageLog in data changes, this function will run.
     messageLog() {
-      this.scrollToEnd();
-      /* if (chatContainer) {
-        chatContainer.current.addEventListener('DOMNodeInserted', event => {
-          const { currentTarget: target } = event;
-          target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
-        });
-      }*/
+      // The nextTick() function allows to execute code after we have changed some data and Vue has updated the page to reflect your changes.
+      this.$nextTick(() => {
+        this.scrollToEnd()
+      })
     },
   },
   methods: {
@@ -150,13 +146,12 @@ export default {
       scrollTop: amount of scroll user has done.
       clientHeight: amount of container a user sees.
       */
-      container.current.scrollIntoView({ behavior: 'smooth' })
       // const container = this.$container.getElementsById('#chatContainer')[0];
       // const container = this.$container.querySelector("#chatContainer");
       // container.scrollTop = container.scrollHeight; // worked
       // container.scrollTo(0, container.scrollHeight); //worked
-      // container.scrollIntoView({behavior: 'smooth'}); // not working
-      // container.scroll({ top: target.scrollHeight, behavior: 'smooth' }); // not worked
+      // container.scrollIntoView({ top : container.scrollHeight, behavior: 'smooth'}); // not working
+      container.scroll({ top: container.scrollHeight, behavior: 'smooth' }); // worked
     },
     // get bot reply after user input chat and button was clicked
     handleSubmit() {
