@@ -2,11 +2,11 @@
   <div class='border-2 mx-auto max-w-3xl overflow-hidden p-0 rounded-xl hover:border-green-500 shadow-lg'>
     <div class='mx-0 mb-0 w-100 rounded'>
       <h4 class='bg-green-700 mb-0 p-1 w-100 opensans rounded-top text-center text-white text-xl'>
-        Chat Bot Sistem Pakar
+        Chat Bot Sistem Pakar Penyakit Kulit
       </h4>
       <div
         id='chatContainer'
-        class='border-2 border-black bg-chat h-96 max-h-96 mx-0 px-2 py-1 w-100 overflow-y-scroll'
+        class='bg-chat h-96 max-h-96 mx-0 px-2 py-1 w-100 overflow-y-scroll'
         ref='chatContainer'
       >
         <span
@@ -130,7 +130,7 @@ export default {
   }),
   watch: {
     // Whenever messageLog in data changes, this function will run.
-    messageLog() {
+    messageLog: function() {
       // The nextTick() function allows to execute code after we have changed some data and Vue has updated the page to reflect your changes.
       this.$nextTick(() => {
         this.scrollToEnd()
@@ -150,8 +150,8 @@ export default {
       // const container = this.$container.querySelector("#chatContainer");
       // container.scrollTop = container.scrollHeight; // worked
       // container.scrollTo(0, container.scrollHeight); //worked
-      // container.scrollIntoView({ top : container.scrollHeight, behavior: 'smooth'}); // not working
       container.scroll({ top: container.scrollHeight, behavior: 'smooth' }); // worked
+      // container.scrollIntoView({ top : container.scrollHeight, behavior: 'smooth'}); // not working
     },
     // get bot reply after user input chat and button was clicked
     handleSubmit() {
@@ -255,7 +255,7 @@ export default {
       else {
         // screening result is not '', return screening result.
         if (this.screeningResult !== '') {
-          reply = 'Ingin melakukan skrining lagi? tekan tombol mulai atau ketik mulai.'
+          reply = `${this.screeningResult}. Ingin melakukan skrining lagi? tekan tombol mulai atau ketik mulai.`
         }
         // screening result is ''
         else if (this.screeningResult === '') {
