@@ -155,13 +155,13 @@ export default {
     },
     // get bot reply after user input chat and button was clicked
     handleSubmit() {
-      this.Output(input)
+      this.Output(this.chatInput)
       this.chatInput='' // return empty form after user press the button
     },
     // get bot reply after user input chat and enter was pressed
     handleEnter(event) {
       if (event.key === 'Enter') {
-        this.Output(input)
+        this.Output(this.chatInput)
         this.chatInput='' // return empty form after user press enter
       }
     },

@@ -95,7 +95,7 @@ export default {
   methods: {
     // user authorization
     async login() {
-      await axios.post("http://localhost:5000/api/login",
+      await axios.post(`https://express-mongoose-validator.herokuapp.com/api/login`,
         ({
           email: this.email,
           password: this.password,
@@ -104,8 +104,12 @@ export default {
         this.send = true;
         this.errorMessage = '';
         // set token on local storage
-        (localStorage.setItem('token', response.data.token));
-        this.$router.push('/dashboard');
+        localStorage.setItem('token', response.data.token);
+        // set user id on local storage
+        localStorage.setItem('user_id', response.data.user.id);
+        // redirect to dashboard
+        this.$router.push(`/dashboard/${response.data.user.id}`);
+        // this.$router.push('/dashboard');
       }).catch(error => {
         this.send = false;
         this.errorMessage = error.message;
