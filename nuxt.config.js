@@ -21,7 +21,9 @@ export default {
   css: [
     // tailwind css
     '@/assets/css/main.css',
-    'bootstrap-icons/font/bootstrap-icons.css'
+    'bootstrap/dist/css/bootstrap.css',
+    // 'bootstrap-vue/dist/bootstrap-vue.css',
+    // 'bootstrap-icons/font/bootstrap-icons.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -42,6 +44,7 @@ export default {
   modules: [
     // axios nuxt
     // '@nuxtjs/axios',
+    'bootstrap-vue/nuxt',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

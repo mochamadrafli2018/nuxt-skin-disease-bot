@@ -51,7 +51,7 @@
         <div v-if="isLoading === true"
           class="border-2 border-green-300 bg-green-100 p-3 rounded text-black"
         >
-          Tunggu sebentar...
+          <b-spinner variant="success" type="grow" label="Spinning"></b-spinner> Tunggu sebentar...
         </div>
         <div v-if="errorMessage === 'Request failed with status code 409'"
           class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
