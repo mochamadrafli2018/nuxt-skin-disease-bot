@@ -21,9 +21,9 @@ export default {
   css: [
     // tailwind css
     '@/assets/css/main.css',
-    'bootstrap/dist/css/bootstrap.css',
+    // 'bootstrap/dist/css/bootstrap.css',
     // 'bootstrap-vue/dist/bootstrap-vue.css',
-    // 'bootstrap-icons/font/bootstrap-icons.css'
+    'bootstrap-icons/font/bootstrap-icons.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

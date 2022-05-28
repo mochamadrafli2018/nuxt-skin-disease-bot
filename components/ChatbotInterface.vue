@@ -1,5 +1,5 @@
 <template>
-  <div class='border-2 mx-auto max-w-3xl overflow-hidden p-0 rounded-xl hover:border-green-500 shadow-lg'>
+  <div class='border-2 mx-auto max-w-3xl overflow-hidden p-0 quicksand rounded-xl hover:border-green-500 shadow-lg'>
     <div class='mx-0 mb-0 w-100 rounded'>
       <h4 class='bg-green-700 mb-0 p-1 w-100 opensans rounded-top text-center text-white text-xl'>
         Chat Bot Sistem Pakar Penyakit Kulit
@@ -181,12 +181,11 @@ export default {
       this.inputBefore=this.inputNow
       this.inputNow='tidak'
     },
-    Output(input) {
+    Output(chatbotInput) {
       // Add user chat
-      this.messageLog = [...this.messageLog, {sender:'user', message:input}]
+      this.messageLog = [...this.messageLog, {sender:'user', message:chatbotInput}]
 
-      input = this.input
-        .toLowerCase()
+      let input = chatbotInput.toLowerCase()
         .replace(/[^\w\s]/gi, '') // replace unneccessary input from user
         .replace(/[\d]/gi, '')
         .replace(/ a /g, ' ')     // example : 'tell me a story' -> 'tell me story'
