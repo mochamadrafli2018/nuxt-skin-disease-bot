@@ -48,7 +48,7 @@
           MASUK
         </button>
         <!-- Validation -->
-        <div v-if="send === true"
+        <div v-if="isLoading === true"
           class="border-2 border-green-300 bg-green-100 p-3 rounded text-black"
         >
           Tunggu sebentar...
@@ -86,7 +86,7 @@ export default {
       email:'',
       password:'',
       errorMessage:'',
-      send:false,
+      isLoading:false,
       // input validation
       emailEmpty:false,
       passwordEmpty:false,
@@ -101,7 +101,7 @@ export default {
           password: this.password,
         })
       ).then(response => {
-        this.send = true;
+        this.isLoading = true;
         this.errorMessage = '';
         // set token on local storage
         localStorage.setItem('token', response.data.token);
@@ -111,7 +111,7 @@ export default {
         this.$router.push(`/dashboard/${response.data.user.id}`);
         // this.$router.push('/dashboard');
       }).catch(error => {
-        this.send = false;
+        this.isLoading = false;
         this.errorMessage = error.message;
       })
     }

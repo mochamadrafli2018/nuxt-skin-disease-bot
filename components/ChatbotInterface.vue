@@ -185,7 +185,7 @@ export default {
       // Add user chat
       this.messageLog = [...this.messageLog, {sender:'user', message:input}]
 
-      input = input
+      input = this.input
         .toLowerCase()
         .replace(/[^\w\s]/gi, '') // replace unneccessary input from user
         .replace(/[\d]/gi, '')
