@@ -6,7 +6,7 @@
       </h4>
       <div
         id='chatContainer'
-        class='bg-chat h-96 max-h-96 mx-0 px-2 py-1 w-100 overflow-y-scroll'
+        class='bg-chat h-96 max-h-96 mx-0 px-2 py-1 quicksand w-100 overflow-y-scroll'
         ref='chatContainer'
       >
         <span
