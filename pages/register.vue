@@ -118,12 +118,12 @@
         </div>
         <div v-if="errorMessage === 'Request failed with status code 409'"
           class="border-2 border-red-300 bg-red-100 p-3 rounded text-black"
-        >Email sudah terdaftar, silahkan masuk <a class='font-bold underline' href='/login'>
+        >Email sudah terdaftar, silahkan masuk <a class='font-bold underline text-white' href='/login'>
           di sini</a>.
         </div>
 
         <hr class='my-2'/>
-        <p>Sudah punya akun? Masuk <a class='font-bold underline' href='/login'>
+        <p>Sudah punya akun? Masuk <a class='font-bold underline text-white' href='/login'>
           di sini</a>
         </p>
       </form>

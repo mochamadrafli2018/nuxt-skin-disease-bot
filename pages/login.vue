@@ -63,10 +63,9 @@
         >
           Email tidak terdaftar, silahkan daftar terlebih dahulu.
         </div>
-        <!--{{ errorMessage }}-->
 
         <hr class='my-2'/>
-        <p>Belum punya akun? Daftar <a class='font-bold underline' href='/register'>
+        <p>Belum punya akun? Daftar <a class='font-bold underline text-white' href='/register'>
           di sini</a>
         </p>
       </form>

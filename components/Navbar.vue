@@ -1,28 +1,28 @@
 <template>
   <div class="quicksand">
-    <nav class='nav flex flex-row justify-center m-0 py-1 px-0 top-0 shadow lg:space-x-6 md:space-x-4 space-x-2 text-white z-20'>
+    <nav class='nav flex flex-row justify-center m-0 py-1 px-0 top-0 shadow lg:space-x-6 md:space-x-4 space-x-2 z-20'>
       <a href="/" v-if="tokenEmpty === true">
-        <p class="font-bold bg-green-700 hover:bg-green-800 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg">
+        <p class="font-bold bg-green-700 hover:bg-green-800 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg text-white">
           Home
         </p>
       </a>
       <a href="/" v-if="tokenEmpty === false">
-        <p class="font-bold bg-green-700 hover:bg-green-800 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg">
+        <p class="font-bold bg-green-700 hover:bg-green-800 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg text-white">
           Dashboard
         </p>
       </a>
       <a href="/guide" v-if="tokenEmpty === false || tokenEmpty === true">
-        <p class="font-bold bg-green-700 hover:bg-green-800 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg">
+        <p class="font-bold bg-green-700 hover:bg-green-800 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg text-white">
           Panduan
         </p>
       </a>
       <a href="/register" v-if="tokenEmpty === true">
-        <p class="font-bold bg-green-700 hover:bg-green-800 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg">
+        <p class="font-bold bg-green-700 hover:bg-green-800 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg text-white">
           Register
         </p>
       </a>
       <a href="/login" v-if="tokenEmpty === true">
-        <p class="font-bold bg-green-700 hover:bg-green-800 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg">
+        <p class="font-bold bg-green-700 hover:bg-green-800 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg text-white">
           Login
         </p>
       </a>
