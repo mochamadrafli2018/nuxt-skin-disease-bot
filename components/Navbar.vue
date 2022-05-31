@@ -23,7 +23,7 @@
       </a>
       <a href="/login" v-if="tokenEmpty === true">
         <p class="font-bold bg-green-700 hover:bg-green-800 focus:bg-green-700 no-underline my-0 px-3 py-2 rounded-lg">
-          Masuk
+          Login
         </p>
       </a>
       <button
@@ -64,7 +64,6 @@ export default {
     }
   },
   methods: {
-    // log out handler
     logoutHandler() {
       //remove token from localStorage
       localStorage.removeItem('token');
@@ -75,7 +74,6 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap");
 .quicksand {
   font-family: Quicksand, Arial, sans-serif;
 }

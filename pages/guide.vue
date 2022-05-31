@@ -35,44 +35,13 @@ export default {
   data: () => ({
     guides: [
       {
-        title:'Panduan untuk Skrining Penyakit Mata',
-        text:`Untuk memulai skrining penyakit mata, pilih gejala-gejala yang di alami pada form, kemudian tekan atau klik tombol submit pada bagian bawah form.`
-      },
-      {
-        title:'Daftar Penyakit Mata pada Sistem Pakar',
-        text:`
-          1.) Ulkus Kornea, 
-          2.) Keratokonus, 
-          3.) Kalazion,
-          4.) Blefaritis, 
-          5.) Hordeolum (Stye), 
-          6.) Konjungtivitis, 
-          7.) Trakoma, 
-          8.) Abalso Retina, 
-          9.) Retinopati Diabetikum, 
-          10.) Glaukoma, 
-          11.) Katarak, 
-          12.) Uveitis, 
-          13.) Selulitis Orbitalis, 
-          14.) Eksoftalmus, 
-          15.) Keratitis Pungtata Superfisialis, 
-          16.) Alergi Mata Merah, 
-          17.) Endoftalmitis, 
-          18.) Trombosis Sinus Kavernosus, 
-          19.) Optic Neuritis, 
-          20.) Dakrioritis, 
-          21.) Degenerasi Makula, 
-          22.) Episkleritis, 
-          23.) Infeksi Herpes Simpleks Kornea, 
-          24.) Infeksi Herpes Zoster Kornea, 
-          25.) Keratitis Ulserativa Perifer, 
-          26.) Degenerasi Makula, 
-          27.) Skleritis.`
+        title:'Panduan untuk Skrining Penyakit Kulit',
+        text:`Untuk memulai skrining penyakit kulit, pilih gejala-gejala yang di alami pada form, kemudian tekan atau klik tombol submit pada bagian bawah form.`
       },
       {
         title:'Catatan Penting',
-        text:`Hasil skrining dari sistem pakar ini tidak bisa dijadikan sebagai keputusan akhir diagnosis penyakit mata anda.
-        Hasil skrining tersebut bisa anda gunakan untuk konsultasi dengan dokter spesialis mata untuk diagnosis lebih lanjut.`
+        text:`Hasil skrining dari sistem pakar ini tidak bisa dijadikan sebagai keputusan akhir diagnosis penyakit kulit anda.
+        Hasil skrining tersebut bisa anda gunakan untuk konsultasi dengan dokter spesialis kulit untuk diagnosis lebih lanjut.`
       },
     ],
   })
@@ -80,7 +49,6 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap");
 footer{
   position:fixed;
   bottom:0;

@@ -12,8 +12,32 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: 'https://clipground.com/images/programming-logo-clipart-5.jpg' },
-      { rel: 'apple-touch-icon', type: 'image/x-icon', href: 'https://clipground.com/images/programming-logo-clipart-5.jpg' }
+      { 
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: 'https://clipground.com/images/programming-logo-clipart-5.jpg'
+      },
+      {
+        rel: 'apple-touch-icon',
+        type: 'image/x-icon',
+        href: 'https://clipground.com/images/programming-logo-clipart-5.jpg'
+      },
+      {
+        rel: 'stylesheet', 
+        href:'https://fonts.googleapis.com/css2?family=Open+Sans&display=swap'
+      },
+      {
+        rel: 'stylesheet', 
+        href:'https://fonts.googleapis.com/css2?family=Poppins&display=swap' 
+      },
+      {
+        rel: 'stylesheet', 
+        href:'https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap'
+      },
+      {
+        rel: 'stylesheet', 
+        href:'https://fonts.googleapis.com/css2?family=Roboto&display=swap' 
+      }
     ]
   },
 

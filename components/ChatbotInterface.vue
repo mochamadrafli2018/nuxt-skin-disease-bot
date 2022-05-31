@@ -6,7 +6,7 @@
       </h4>
       <div
         id='chatContainer'
-        class='bg-chat h-96 max-h-96 mx-0 px-2 py-1 quicksand w-100 overflow-y-scroll'
+        class='bg-chat h-96 max-h-96 mx-0 px-2 py-1 w-100 overflow-y-scroll'
         ref='chatContainer'
       >
         <span
@@ -852,11 +852,6 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-
 .opensans {
   font-family: "Open Sans", Arial, sans-serif;
 }

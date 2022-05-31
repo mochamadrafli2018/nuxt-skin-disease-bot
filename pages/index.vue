@@ -11,7 +11,7 @@
 </template>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap");
+
 .quicksand {
   font-family: Quicksand, Arial, sans-serif;
 }
